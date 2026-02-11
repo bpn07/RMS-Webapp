@@ -1,65 +1,216 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { RestaurantHero } from "@/layout/Homepage/HeroSection";
+import { RestaurantInfo } from "@/layout/Homepage/Info";
+import { CategoryNav } from "@/layout/Homepage/MenuNav";
+import { MenuItemCard } from "@/layout/Homepage/MenuItems";
+import { BasketSidebar } from "@/layout/Homepage/Cart";
+import { MobileBasket } from "@/layout/Homepage/MobileBasket";
+import { restaurantData } from "@/lib/restuarant-data";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { PROMOTION_POPUPS } from "@/layout/Homepage/PromoPopups";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { FirstTimePopup } from "@/components/FirstTimePopup";
+
+export default function RestaurantPage() {
+  const popularSection = restaurantData.categories.find(
+    (cat) => cat.id === "popular-with-others",
+  );
+  const menuCategories = restaurantData.categories.filter(
+    (cat) => cat.id !== "popular-with-others",
+  );
+
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!sliderRef.current) return;
+
+    const cardWidth = sliderRef.current.firstElementChild?.clientWidth || 300;
+
+    sliderRef.current.scrollBy({
+      left: direction === "left" ? -cardWidth : cardWidth,
+      behavior: "smooth",
+    });
+  };
+
+  const updateScrollButtons = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
+  };
+
+  useEffect(() => {
+    updateScrollButtons();
+    window.addEventListener("resize", updateScrollButtons);
+    return () => window.removeEventListener("resize", updateScrollButtons);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <>
+      <FirstTimePopup />
+
+      <div className="min-h-screen bg-gray-50 pb-20 lg:pb-0">
+        <main className="mx-auto max-w-7xl px-2 sm:px-4 py-4 sm:py-6">
+          {/* Restaurant Hero and Info - responsive grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">
+            <RestaurantHero
+              imageUrl={restaurantData.heroImage}
+              altText={`${restaurantData.name} food`}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <RestaurantInfo
+              name={restaurantData.name}
+              location={restaurantData.location}
+              rating={restaurantData.rating}
+              delivery={restaurantData.delivery}
+            />
+          </div>
+        </main>
+
+        <CategoryNav categories={menuCategories} />
+
+        <div className="mx-auto max-w-7xl px-2 sm:px-4 py-4 sm:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-6 sm:gap-8">
+            <div className="space-y-8 sm:space-y-12">
+              {/* Promotions */}
+              <div className="relative">
+                {/* LEFT ARROW */}
+                {canScrollLeft && (
+                  <button
+                    aria-label="Scroll left"
+                    onClick={() => scroll("left")}
+                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-10
+                   h-8 w-8 items-center justify-center rounded-full
+                   bg-white shadow border hover:bg-muted"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                )}
+
+                {/* SLIDER */}
+                <div
+                  ref={sliderRef}
+                  onScroll={updateScrollButtons}
+                  className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide pb-2 -mx-2 px-2 sm:mx-0 sm:px-0"
+                >
+                  {restaurantData.promotions.map((promo) => {
+                    const popupContent =
+                      promo.popupKey && PROMOTION_POPUPS[promo.popupKey]
+                        ? PROMOTION_POPUPS[promo.popupKey]
+                        : null;
+
+                    const Card = (
+                      <div
+                        className={`min-w-65 sm:min-w-75 rounded-lg border bg-white p-3 sm:p-4 flex gap-3 transition ${
+                          popupContent
+                            ? "cursor-pointer hover:bg-muted/40"
+                            : "cursor-default"
+                        }`}
+                      >
+                        <span className="text-2xl sm:text-3xl shrink-0">
+                          {promo.icon}
+                        </span>
+
+                        <div>
+                          <h3 className="font-semibold text-xs sm:text-sm">
+                            {promo.title}
+                          </h3>
+
+                          <p className="text-xs text-muted-foreground mt-1 whitespace-pre-line">
+                            {promo.description}
+                          </p>
+                        </div>
+                      </div>
+                    );
+
+                    if (!popupContent) {
+                      return <div key={promo.id}>{Card}</div>;
+                    }
+
+                    return (
+                      <Dialog key={promo.id}>
+                        <DialogTrigger asChild>{Card}</DialogTrigger>
+
+                        <DialogContent className="max-w-md">
+                          <DialogHeader>
+                            <DialogTitle>{promo.title}</DialogTitle>
+                          </DialogHeader>
+
+                          {popupContent}
+                        </DialogContent>
+                      </Dialog>
+                    );
+                  })}
+                </div>
+
+                {/* RIGHT ARROW */}
+                {canScrollRight && (
+                  <button
+                    aria-label="Scroll right"
+                    onClick={() => scroll("right")}
+                    className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10
+                   h-8 w-8 items-center justify-center rounded-full
+                   bg-white shadow border hover:bg-muted"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                )}
+              </div>
+
+              {/* Popular items - horizontal scroll on mobile */}
+              {popularSection && (
+                <section>
+                  <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+                    {popularSection.name}
+                  </h2>
+                  <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 scrollbar-hide -mx-2 px-2 sm:mx-0 sm:px-0">
+                    {popularSection.items.map((item) => (
+                      <div key={item.id} className="shrink-0 w-40 sm:w-44">
+                        <MenuItemCard item={item} />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Menu categories - stacked vertically */}
+              {menuCategories.map((category) => (
+                <section
+                  key={category.id}
+                  id={category.id}
+                  className="scroll-mt-32"
+                >
+                  <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+                    {category.name}
+                  </h2>
+                  <div className="space-y-2 sm:space-y-3">
+                    {category.items.map((item) => (
+                      <MenuItemCard key={item.id} item={item} horizontal />
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+
+            {/* Desktop basket sidebar */}
+            <div className="hidden lg:block max-w-90 w-full">
+              <BasketSidebar />
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <MobileBasket />
+      </div>
+    </>
   );
 }
