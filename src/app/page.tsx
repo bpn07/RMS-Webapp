@@ -173,9 +173,9 @@ export default function RestaurantPage() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {popularSection.name}
                   </h2>
-                  <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 scrollbar-hide -mx-2 px-2 sm:mx-0 sm:px-0">
+                  <div className="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar">
                     {popularSection.items.map((item) => (
-                      <div key={item.id} className="shrink-0 w-40 sm:w-44">
+                      <div key={item.id}>
                         <MenuItemCard item={item} />
                       </div>
                     ))}
@@ -193,7 +193,7 @@ export default function RestaurantPage() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {category.name}
                   </h2>
-                  <div className="space-y-2 sm:space-y-3">
+                  <div className="w-full space-y-2 sm:space-y-3 flex flex-wrap items-center gap-8">
                     {category.items.map((item) => (
                       <MenuItemCard key={item.id} item={item} horizontal />
                     ))}

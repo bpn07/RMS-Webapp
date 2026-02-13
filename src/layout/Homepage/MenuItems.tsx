@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dialog";
 import type { MenuItem } from "@/lib/restuarant-data";
 import { useBasket } from "@/hooks/useBasket";
+import { BiSolidDish, BiSolidStar } from "react-icons/bi";
+import { LuClock2 } from "react-icons/lu";
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -41,9 +43,9 @@ export function MenuItemCard({ item, horizontal = false }: MenuItemCardProps) {
         <Button
           size="icon"
           variant="ghost"
-          className="h-7 w-7 sm:h-8 sm:w-8 rounded-full shrink-0"
+          className="w-full rounded-full border-2 border-black font-semibold text-black hover:bg-black hover:text-white transition-colors duration-500 ease-in-out"
         >
-          <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
+          Add to Cart
         </Button>
       </DialogTrigger>
 
@@ -53,13 +55,18 @@ export function MenuItemCard({ item, horizontal = false }: MenuItemCardProps) {
         </DialogHeader>
 
         <div className="flex flex-col gap-3 mt-2">
-          <Image
-            src={item.image || "/placeholder.svg"}
-            alt={item.name}
-            width={150}
-            height={100}
-            className="w-full h-28 object-cover rounded"
-          />
+          <div className="rounded-lg object-cover w-full h-52 bg-gray-200 overflow-hidden">
+            {/* <Image
+          src={item.image || "/placeholder.svg"}
+          alt={item.name}
+          width={100}
+          height={100}
+          className="object-cover w-full"
+        /> */}
+            <div className="w-full h-full flex items-center justify-center">
+              <BiSolidDish size={100} className="text-gray-400" />
+            </div>
+          </div>
 
           {item.description && (
             <p className="text-sm text-muted-foreground">{item.description}</p>
@@ -107,29 +114,42 @@ export function MenuItemCard({ item, horizontal = false }: MenuItemCardProps) {
   );
 
   const horizontalCard = (
-    <div className="flex gap-2 sm:gap-3 rounded-lg border bg-white p-2 sm:p-3 hover:shadow-md transition-shadow">
-      <Image
-        src={item.image || "/placeholder.svg"}
-        alt={item.name}
-        width={100}
-        height={100}
-        className="rounded-lg object-cover shrink-0 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28"
-      />
-      <div className="flex flex-col flex-1 min-w-0">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-xs sm:text-sm line-clamp-2">
-              {item.name}
-            </h3>
-            {item.description && (
-              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                {item.description}
-              </p>
-            )}
-          </div>
-
-          {dialog}
+    <div className="w-92 flex flex-col gap-2 rounded-lg border bg-white p-6 hover:shadow-md transition-shadow">
+      <div className="rounded-lg object-cover w-full h-52 bg-gray-200 overflow-hidden">
+        {/* <Image
+          src={item.image || "/placeholder.svg"}
+          alt={item.name}
+          width={100}
+          height={100}
+          className="object-cover w-full"
+        /> */}
+        <div className="w-full h-full flex items-center justify-center">
+          <BiSolidDish size={100} className="text-gray-400" />
         </div>
+      </div>
+      <p className="font-bold text-lg line-clamp-2">{item.name}</p>
+      <div className="grid grid-cols-2">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-yellow-500 rounded p-px flex items-center justify-center">
+            <BiSolidStar className="text-white" />
+          </div>
+          <p className="font-medium">4.2 (100)</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <LuClock2 />
+          <p className="font-medium">20-30 mins</p>
+        </div>
+      </div>
+      <p className="text-sm text- mt-1 line-clamp-2">{item.description}</p>
+      <div className="grid grid-cols-2">
+        <p className="text-gray-400 line-through inline-flex items-center gap-2">
+          £{item.price.toFixed(2)}
+          <span className="text-lg font-bold text-black line-through">
+            £{item.price.toFixed(2)}
+          </span>
+        </p>
+
+        {dialog}
       </div>
     </div>
   );
@@ -161,5 +181,5 @@ export function MenuItemCard({ item, horizontal = false }: MenuItemCardProps) {
     </div>
   );
 
-  return horizontal ? horizontalCard : verticalCard;
+  return horizontalCard;
 }
