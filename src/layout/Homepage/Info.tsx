@@ -116,7 +116,7 @@ export function RestaurantInfo({
 }: RestaurantInfoProps) {
   const [activeDialog, setActiveDialog] = useState<DialogKey>(null);
   const [sortBy, setSortBy] = useState<"latest" | "highest" | "lowest">(
-    "latest"
+    "latest",
   );
 
   const [addresses, setAddresses] = useState([
@@ -188,7 +188,7 @@ export function RestaurantInfo({
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
-                  className={`h-4 w-4 ${
+                  className={`h-4 w-4 hover:scale-1.02 ${
                     idx < Math.round(rating.score)
                       ? "text-yellow-400 fill-yellow-400"
                       : "text-gray-300"
