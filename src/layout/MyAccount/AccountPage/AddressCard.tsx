@@ -128,14 +128,14 @@ export default function AddressCard() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleEdit(address)}
-                  className="flex items-center gap-1 text-sm text-cyan-600 hover:underline"
+                  className="flex items-center gap-1 text-sm text-cyan-600 hover:underline cursor-pointer"
                 >
                   <Pencil size={14} />
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(address.id)}
-                  className="flex items-center gap-1 text-sm text-red-600 hover:underline"
+                  className="flex items-center gap-1 text-sm text-red-600 hover:underline cursor-pointer"
                 >
                   <Trash2 size={14} />
                   Delete
