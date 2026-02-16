@@ -89,7 +89,7 @@ export default function OrderHistoryPage() {
                       </span>
 
                       <div className="flex gap-3">
-                        <button className="text-deliveroo-teal text-sm font-bold hover:underline">
+                        <button className="text-deliveroo-teal text-sm font-bold hover:underline cursor-pointer">
                           View receipt
                         </button>
                         <button className="bg-deliveroo-teal text-white px-4 py-2 rounded-sm text-sm font-bold hover:bg-deliveroo-dark-teal transition-colors">

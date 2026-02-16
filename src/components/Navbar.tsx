@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import { useBasket } from "@/hooks/useBasket";
 import Link from "next/link";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import WishlistDrawer from "./NavbarPanels/WishlistPanel";
 import BasketDrawer from "./NavbarPanels/BasketPanel";
 import AccountDrawer from "./NavbarPanels/AccountPanel";
@@ -12,6 +18,12 @@ import AccountDrawer from "./NavbarPanels/AccountPanel";
 interface HeaderProps {
   searchPlaceholder?: string;
 }
+
+const navItems = [
+  { href: "/myaccount", label: "Account details" },
+  { href: "/order", label: "Order history" },
+  { href: "/faq", label: "FAQ" },
+];
 
 export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
   const cartCount = useBasket((state) => state.getTotalItems());
@@ -66,7 +78,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               <span className="font-medium">{cartCount}</span>
             </Button>
 
-            {/* 🔍 Mobile Search Icon */}
+            {/*  Mobile Search Icon */}
 
             <Button
               variant="ghost"
@@ -100,17 +112,50 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               </Button>
             </Link>
 
-            {/* Account (Tablet+) */}
+            <DropdownMenu>
+              {/* Trigger Button */}
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="gap-2 hidden sm:flex"
+                >
+                  <User className="h-4 w-4 " />
+                  <span className="hidden md:inline">Account</span>
+                </Button>
+              </DropdownMenuTrigger>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2 hidden sm:flex"
-              onClick={() => setAccountOpen(true)}
-            >
-              <User className="h-4 w-4" />
-              <span className="hidden md:inline">Account</span>
-            </Button>
+              {/* Dropdown Content with animation */}
+              <DropdownMenuContent
+                align="end"
+                className="w-48 rounded-lg bg-white/90 backdrop-blur-md shadow-lg border border-gray-200 p-1 animate-slideDownAndFade"
+              >
+                {navItems.map((item) => (
+                  <DropdownMenuItem
+                    key={item.href}
+                    asChild
+                    className="flex items-center justify-between px-4 py-2 rounded-md text-gray-700 hover:bg-[#00ccbc]/10 hover:text-[#00ccbc] transition-colors duration-200 focus:outline-none focus:bg-[#00ccbc]/20 focus:text-[#00ccbc]"
+                  >
+                    <Link href={item.href}>{item.label}</Link>
+                  </DropdownMenuItem>
+                ))}
+                <div className="border-t border-gray-200 my-1"></div>
+
+                {/* Logout */}
+                <DropdownMenuItem
+                  asChild
+                  className="flex justify-between items-center px-4 py-2 rounded-md text-red-600 hover:bg-red-50 hover:text-red-700"
+                >
+                  <button
+                    onClick={() => {
+                      console.log("Logout clicked");
+                    }}
+                  >
+                    Logout
+                  </button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
