@@ -61,7 +61,7 @@ export function CategoryNav({ categories }: CategoryNavProps) {
               className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity cursor-pointer ${
                 activeCategory === category.id
                   ? "text-white bg-[#00ccbc] py-1 px-3 rounded-full"
-                  : "text-gray-700"
+                  : "text-gray-700 hover:underline hover:text-[#00ccbc]"
               }`}
             >
               {category.name}
