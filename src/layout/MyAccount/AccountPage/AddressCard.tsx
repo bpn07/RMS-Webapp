@@ -11,6 +11,8 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 type Address = {
   id: number;
@@ -53,8 +55,8 @@ export default function AddressCard() {
     if (editingId) {
       setAddresses((prev) =>
         prev.map((addr) =>
-          addr.id === editingId ? { ...draft, id: editingId } : addr
-        )
+          addr.id === editingId ? { ...draft, id: editingId } : addr,
+        ),
       );
     } else {
       setAddresses((prev) => [...prev, { ...draft, id: newId }]);
@@ -112,7 +114,7 @@ export default function AddressCard() {
                   loading="lazy"
                   className="border-0"
                   src={`https://www.google.com/maps?q=${encodeURIComponent(
-                    address.city
+                    address.city,
                   )}&z=15&output=embed`}
                 />
               </div>

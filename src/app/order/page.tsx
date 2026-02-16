@@ -3,24 +3,24 @@ import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 
 const orders = [
-  // {
-  //   id: "ORD-7234",
-  //   restaurant: "Burger & Lobster",
-  //   date: "24 Dec 2025, 19:30",
-  //   status: "Delivered",
-  //   total: "£42.50",
-  //   items: "2x Original Lobster Roll, 1x Truffle Fries",
-  //   image: "/burger-lobster.jpg",
-  // },
-  // {
-  //   id: "ORD-6192",
-  //   restaurant: "Sushi Gourmet",
-  //   date: "18 Dec 2025, 13:15",
-  //   status: "Delivered",
-  //   total: "£28.00",
-  //   items: "1x Salmon Sashimi Set, 1x Miso Soup",
-  //   image: "/assorted-sushi-platter.png",
-  // },
+  {
+    id: "ORD-7234",
+    restaurant: "Burger & Lobster",
+    date: "24 Dec 2025, 19:30",
+    status: "Delivered",
+    total: "£42.50",
+    items: "2x Original Lobster Roll, 1x Truffle Fries",
+    image: "/burger-lobster.jpg",
+  },
+  {
+    id: "ORD-6192",
+    restaurant: "Sushi Gourmet",
+    date: "18 Dec 2025, 13:15",
+    status: "Delivered",
+    total: "£28.00",
+    items: "1x Salmon Sashimi Set, 1x Miso Soup",
+    image: "/assorted-sushi-platter.png",
+  },
 ];
 
 // const orders = [];

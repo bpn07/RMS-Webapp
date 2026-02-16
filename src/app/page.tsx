@@ -101,7 +101,7 @@ export default function RestaurantPage() {
                 <div
                   ref={sliderRef}
                   onScroll={updateScrollButtons}
-                  className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide pb-2 -mx-2 px-2 sm:mx-0 sm:px-0"
+                  className="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2 sm:mx-0 sm:px-0"
                 >
                   {restaurantData.promotions.map((promo) => {
                     const popupContent =
@@ -111,22 +111,33 @@ export default function RestaurantPage() {
 
                     const Card = (
                       <div
-                        className={`min-w-65 sm:min-w-75 rounded-lg border bg-white p-3 sm:p-4 flex gap-3 transition ${
-                          popupContent
-                            ? "cursor-pointer hover:bg-muted/40"
-                            : "cursor-default"
-                        }`}
+                        className={`group relative min-w-65 sm:min-w-75 rounded-2xl 
+                                    bg-linear-to-br from-white to-blue-50
+                                    border border-neutral-200/70
+                                    p-4 sm:p-5 flex gap-4
+                                    shadow-sm hover:shadow-lg
+                                    transition-all duration-300 ease-out
+                                    ${popupContent ? "cursor-pointer hover:-translate-y-1" : "cursor-default"}`}
                       >
-                        <span className="text-2xl sm:text-3xl shrink-0">
-                          {promo.icon}
-                        </span>
+                        {/* Soft Hover Glow */}
+                        <div className="absolute inset-0 rounded-2xl bg-neutral-100/40 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none" />
 
-                        <div>
-                          <h3 className="font-semibold text-xs sm:text-sm">
+                        {/* Icon */}
+                        <div
+                          className="relative z-10 flex h-12 w-12 items-center justify-center 
+                                     rounded-xl bg-neutral-100 text-neutral-700 text-xl shrink-0
+                                     transition-transform duration-300 group-hover:scale-105"
+                        >
+                          {promo.icon}
+                        </div>
+
+                        {/* Content */}
+                        <div className="relative z-10">
+                          <h3 className="font-medium text-sm sm:text-base text-neutral-900 tracking-tight">
                             {promo.title}
                           </h3>
 
-                          <p className="text-xs text-muted-foreground mt-1 whitespace-pre-line">
+                          <p className="text-xs sm:text-sm text-neutral-500 mt-1 leading-relaxed whitespace-pre-line">
                             {promo.description}
                           </p>
                         </div>
@@ -173,7 +184,7 @@ export default function RestaurantPage() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {popularSection.name}
                   </h2>
-                  <div className="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar">
+                  <div className="flex item-center gap-3 sm:gap-4 overflow-x-auto no-scrollbar py-2">
                     {popularSection.items.map((item) => (
                       <div key={item.id}>
                         <MenuItemCard item={item} />
@@ -193,9 +204,9 @@ export default function RestaurantPage() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {category.name}
                   </h2>
-                  <div className="w-full space-y-2 sm:space-y-3 flex flex-wrap items-center gap-8">
+                  <div className="w-full space-y-2 sm:space-y-3 flex flex-wrap items-start gap-8">
                     {category.items.map((item) => (
-                      <MenuItemCard key={item.id} item={item} horizontal />
+                      <MenuItemCard key={item.id} item={item} />
                     ))}
                   </div>
                 </section>
