@@ -27,7 +27,7 @@ export default function PasswordSection() {
 
         <button
           disabled={!isValid}
-          className={`px-4 py-2 rounded-lg transition
+          className={`px-4 py-2 rounded-lg transition cursor-pointer
             ${
               isValid
                 ? "bg-cyan-600 text-white hover:bg-cyan-700"

@@ -17,7 +17,7 @@ export default function PaymentMethods() {
 
         <button
           aria-label="Delete"
-          className="text-red-500 hover:bg-gray-100 p-3 rounded-2xl"
+          className="text-red-500 hover:bg-gray-100 p-3 rounded-2xl cursor-pointer"
         >
           DELETE
         </button>

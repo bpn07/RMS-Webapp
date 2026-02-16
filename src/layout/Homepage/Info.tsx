@@ -97,11 +97,15 @@ function InfoRow({
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-2 text-left hover:opacity-80 transition-opacity w-full group"
+      className="flex items-center gap-2 text-left w-full group transition-all hover:opacity-90 cursor-pointer"
     >
-      <Icon className="h-5 w-5 text-muted-foreground" />
-      <span className="flex-1">{children}</span>
-      <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+      <Icon className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:scale-105 group-hover:text-black" />
+
+      <span className="flex-1 transition-colors duration-200 group-hover:text-black">
+        {children}
+      </span>
+
+      <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-black" />
     </button>
   );
 }
@@ -188,7 +192,7 @@ export function RestaurantInfo({
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
-                  className={`h-4 w-4 hover:scale-1.02 ${
+                  className={`h-4 w-4 ${
                     idx < Math.round(rating.score)
                       ? "text-yellow-400 fill-yellow-400"
                       : "text-gray-300"
