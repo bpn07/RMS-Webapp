@@ -23,7 +23,7 @@ export default function ContactPref() {
         <Switch
           checked={emailPref}
           onCheckedChange={setEmailPref}
-          className={`${getTrackClass(emailPref)}`}
+          className={`cursor-pointer ${getTrackClass(emailPref)}`}
         />
       </div>
 
@@ -32,7 +32,7 @@ export default function ContactPref() {
         <Switch
           checked={smsPref}
           onCheckedChange={setSmsPref}
-          className={`${getTrackClass(smsPref)}`}
+          className={`cursor-pointer ${getTrackClass(smsPref)}`}
         />
       </div>
 
@@ -41,7 +41,7 @@ export default function ContactPref() {
         <Switch
           checked={callPref}
           onCheckedChange={setCallPref}
-          className={`${getTrackClass(callPref)}`}
+          className={`cursor-pointer ${getTrackClass(callPref)}`}
         />
       </div>
     </Card>

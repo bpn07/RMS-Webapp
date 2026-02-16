@@ -9,7 +9,7 @@ interface CategoryNavProps {
 
 export function CategoryNav({ categories }: CategoryNavProps) {
   const [activeCategory, setActiveCategory] = useState<string>(
-    categories[0]?.id || ""
+    categories[0]?.id || "",
   );
 
   useEffect(() => {
@@ -58,9 +58,9 @@ export function CategoryNav({ categories }: CategoryNavProps) {
             <button
               key={category.id}
               onClick={() => scrollToCategory(category.id)}
-              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity ${
+              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity cursor-pointer ${
                 activeCategory === category.id
-                  ? "text-[#00ccbc] border-b-2 border-[#00ccbc]"
+                  ? "text-white bg-[#00ccbc] py-1 px-3 rounded-full"
                   : "text-gray-700"
               }`}
             >
