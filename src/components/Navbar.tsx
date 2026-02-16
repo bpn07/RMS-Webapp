@@ -11,7 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import WishlistDrawer from "./NavbarPanels/WishlistPanel";
 import BasketDrawer from "./NavbarPanels/BasketPanel";
 
@@ -83,7 +82,8 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               )}
             </Button>
 
-            {/* Mobile Search */}
+            {/*  Mobile Search Icon */}
+
             <Button
               type="button"
               aria-label="Open search"
@@ -95,47 +95,67 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               <Search className="h-5 w-5" />
             </Button>
 
-            {/* Account Dropdown (All Screens) */}
+            {/* Mobile Login Icon */}
+
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden px-2"
+              onClick={() => setAccountOpen(true)}
+            >
+              <User className="h-5 w-5" />
+            </Button>
+
+            {/* Desktop Login */}
+            <Link href="/login">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-2 hidden lg:flex"
+              >
+                <User className="h-4 w-4" />
+                <span>Sign up or log in</span>
+              </Button>
+            </Link>
+
             <DropdownMenu>
+              {/* Trigger Button */}
               <DropdownMenuTrigger asChild>
                 <Button
-                  type="button"
-                  aria-label="Open account menu"
                   variant="ghost"
                   size="sm"
-                  className="gap-2 px-2 sm:px-4"
+                  className="gap-2 hidden sm:flex"
                 >
-                  <User className="h-4 w-4" />
+                  <User className="h-4 w-4 " />
                   <span className="hidden md:inline">Account</span>
                 </Button>
               </DropdownMenuTrigger>
 
+              {/* Dropdown Content with animation */}
               <DropdownMenuContent
                 align="end"
-                sideOffset={8}
-                className="w-56 rounded-lg bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 p-1"
+                className="w-48 rounded-lg bg-white/90 backdrop-blur-md shadow-lg border border-gray-200 p-1 animate-slideDownAndFade"
               >
                 {navItems.map((item) => (
                   <DropdownMenuItem
                     key={item.href}
                     asChild
-                    className="px-4 py-3 rounded-md text-gray-700 hover:bg-[#00ccbc]/10 hover:text-[#00ccbc] focus:bg-[#00ccbc]/20 focus:text-[#00ccbc] transition-colors"
+                    className="flex items-center justify-between px-4 py-2 rounded-md text-gray-700 hover:bg-[#00ccbc]/10 hover:text-[#00ccbc] transition-colors duration-200 focus:outline-none focus:bg-[#00ccbc]/20 focus:text-[#00ccbc]"
                   >
                     <Link href={item.href}>{item.label}</Link>
                   </DropdownMenuItem>
                 ))}
+                <div className="border-t border-gray-200 my-1"></div>
 
-                <div className="border-t border-gray-200 my-1" />
-
+                {/* Logout */}
                 <DropdownMenuItem
                   asChild
-                  className="px-4 py-3 rounded-md text-red-600 hover:bg-red-50 focus:bg-red-100"
+                  className="flex justify-between items-center px-4 py-2 rounded-md text-red-600 hover:bg-red-50 hover:text-red-700"
                 >
                   <button
-                    type="button"
-                    aria-label="Logout"
-                    className="w-full text-left"
-                    onClick={() => console.log("Logout clicked")}
+                    onClick={() => {
+                      console.log("Logout clicked");
+                    }}
                   >
                     Logout
                   </button>
