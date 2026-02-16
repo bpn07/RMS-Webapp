@@ -51,17 +51,17 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   };
 
   return (
-    <div className="border-t border-b bg-white sticky top-16 z-10">
+    <div className="border-t border-b bg-white sticky top-16 z-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex gap-4 sm:gap-6 overflow-x-auto px-2 sm:px-4 py-3 sm:py-4 scrollbar-hide">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => scrollToCategory(category.id)}
-              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity ${
+              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:text-[#00ccbc] transition-opacity cursor-pointer ${
                 activeCategory === category.id
-                  ? "text-[#00ccbc] border-b-2 border-[#00ccbc]"
-                  : "text-gray-700"
+                  ? "text-white bg-[#00ccbc] py-1 px-3 rounded-full hover:text-white"
+                  : "text-gray-700 hover:underline "
               }`}
             >
               {category.name}

@@ -99,9 +99,13 @@ function InfoRow({
       onClick={onClick}
       className="flex items-center gap-2 text-left hover:opacity-80 transition-opacity w-full group"
     >
-      <Icon className="h-5 w-5 text-muted-foreground" />
-      <span className="flex-1">{children}</span>
-      <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+      <Icon className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:scale-105 group-hover:text-black" />
+
+      <span className="flex-1 transition-colors duration-200 group-hover:text-[#00ccbc]">
+        {children}
+      </span>
+
+      <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-[#00ccbc]" />
     </button>
   );
 }
