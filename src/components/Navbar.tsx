@@ -108,7 +108,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                 className="gap-2 hidden lg:flex"
               >
                 <User className="h-4 w-4" />
-                <span>Sign up or log in</span>
+                <span>Sign Up or Log In</span>
               </Button>
             </Link>
 
