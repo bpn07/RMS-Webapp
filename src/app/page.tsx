@@ -60,7 +60,7 @@ export default function RestaurantPage() {
     <>
       <FirstTimePopup />
 
-      <div className="min-h-screen bg-gray-50 pb-20 lg:pb-0">
+      <div className="min-h-screen bg-primary-foreground pb-20 lg:pb-0">
         <main className="mx-auto max-w-7xl px-2 sm:px-4 py-4 sm:py-6">
           {/* Restaurant Hero and Info - responsive grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">

@@ -11,9 +11,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import WishlistDrawer from "@/components/NavbarPanels/WishlistPanel";
+import BasketDrawer from "@/components/NavbarPanels/BasketPanel";
+import ThemeColorToggle from "@/components/ThemeColorToggle";
+import { ThemeModeToggle } from "@/components/ThemeModeToggle";
 
-import WishlistDrawer from "./NavbarPanels/WishlistPanel";
-import BasketDrawer from "./NavbarPanels/BasketPanel";
 
 interface HeaderProps {
   searchPlaceholder?: string;
@@ -94,7 +96,8 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
             >
               <Search className="h-5 w-5" />
             </Button>
-
+            <ThemeColorToggle />
+            <ThemeModeToggle />
             {/* Account Dropdown (All Screens) */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -167,6 +170,8 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
           <BasketDrawer onClose={() => setBasketOpen(false)} />
         </>
       )}
+
+
 
       {/* Mobile Search */}
       {mobileSearchOpen && (
