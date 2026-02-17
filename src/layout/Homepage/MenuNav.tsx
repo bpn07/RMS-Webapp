@@ -51,7 +51,7 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   };
 
   return (
-    <div className="border-t border-b bg-white sticky top-16 z-10">
+    <div className="border-t border-b bg-white sticky top-16 z-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex gap-4 sm:gap-6 overflow-x-auto px-2 sm:px-4 py-3 sm:py-4 scrollbar-hide">
           {categories.map((category) => (
@@ -61,7 +61,7 @@ export function CategoryNav({ categories }: CategoryNavProps) {
               className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity cursor-pointer ${
                 activeCategory === category.id
                   ? "text-white bg-[#00ccbc] py-1 px-3 rounded-full"
-                  : "text-gray-700"
+                  : "text-gray-700 hover:underline hover:text-[#00ccbc]"
               }`}
             >
               {category.name}
