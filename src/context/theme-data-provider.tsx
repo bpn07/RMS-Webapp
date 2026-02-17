@@ -1,4 +1,5 @@
 "use client"
+import FullPageLoader from "@/components/FullPageLoader";
 import setGlobalColorTheme from "@/lib/theme-colors";
 import { ThemeProviderProps, useTheme } from "next-themes";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -19,15 +20,23 @@ export default function ThemeDataProvider({ children }: ThemeProviderProps) {
 
     const [themeColor, setThemeColor] = useState<ThemeColors>(getSavedThemeColor() as ThemeColors);
     const [isMounted, setIsMounted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { resolvedTheme: theme } = useTheme();
-    const mode = theme === "dark" ? "dark" : "light";
 
     useEffect(() => {
         if (!theme) return;
+        const mode = theme === "dark" ? "dark" : "light";
+        setIsLoading(true)
         localStorage.setItem("themeColor", themeColor);
         setGlobalColorTheme(mode, themeColor);
         setGlobalColorTheme(theme as "light" | "dark", themeColor);
-        setIsMounted(true);
+
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+            setIsMounted(true);
+        }, 1000);
+
+        return () => clearTimeout(timer);
     }, [themeColor, theme]);
 
     if (!isMounted) {
@@ -36,6 +45,7 @@ export default function ThemeDataProvider({ children }: ThemeProviderProps) {
 
     return (
         <ThemeContext.Provider value={{ themeColor, setThemeColor }}>
+            {isLoading && <FullPageLoader />}
             {children}
         </ThemeContext.Provider>
     )
