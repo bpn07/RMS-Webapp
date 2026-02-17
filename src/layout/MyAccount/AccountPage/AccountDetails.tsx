@@ -21,7 +21,7 @@ export default function AccountDetailsTab() {
               <input
                 id="firstName"
                 type="text"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -36,7 +36,7 @@ export default function AccountDetailsTab() {
               <input
                 id="lastName"
                 type="text"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
@@ -53,7 +53,7 @@ export default function AccountDetailsTab() {
               <input
                 id="email"
                 type="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 readOnly
               />
               <div className="flex italic  items-center">
@@ -72,7 +72,7 @@ export default function AccountDetailsTab() {
               <input
                 id="dob"
                 type="date"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <div className="flex italic  items-center">
                 To change your email, please contact support.
@@ -94,14 +94,14 @@ export default function AccountDetailsTab() {
                 type="tel"
                 defaultValue="+977 9812345678"
                 placeholder="+1 (555) 123-4567"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 readOnly
               />
 
               <div className="flex items-center justify-between mt-2">
                 <a
                   href="/phoneverification"
-                  className="underline text-cyan-500"
+                  className="underline text-primary"
                 >
                   Edit
                 </a>

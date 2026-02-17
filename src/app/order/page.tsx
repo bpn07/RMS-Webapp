@@ -31,7 +31,7 @@ export default function OrderHistoryPage() {
   return (
     <div className="min-h-screen bg-gray-50/50">
       {/* Hero */}
-      <header className="bg-cyan-500 py-16 overflow-hidden">
+      <header className="bg-primary py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
             Orders
@@ -43,7 +43,7 @@ export default function OrderHistoryPage() {
       <main className="max-w-5xl mx-auto px-4 -mt-16s py-20">
         {hasOrders ? (
           <div className="bg-white rounded-sm shadow-sm border border-gray-100 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl font-bold text-primary mb-6">
               Past orders
             </h2>
 
@@ -51,7 +51,7 @@ export default function OrderHistoryPage() {
               {orders.map((order) => (
                 <div
                   key={order.id}
-                  className="flex flex-col md:flex-row gap-6 p-6 border border-gray-100 rounded-sm hover:border-deliveroo-teal/30 hover:shadow-md transition-all group"
+                  className="flex flex-col md:flex-row gap-6 p-6 border border-border rounded-sm hover:border-deliveroo-teal/30 hover:shadow-md transition-all group"
                 >
                   <div className="w-20 h-20 bg-gray-100 rounded-sm overflow-hidden shrink-0">
                     <Image

@@ -89,7 +89,7 @@ export default function RestaurantPage() {
                   <button
                     aria-label="Scroll left"
                     onClick={() => scroll("left")}
-                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-11 h-8 w-8 items-center justify-center rounded-full bg-white shadow border hover:bg-muted"
+                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-11 h-8 w-8 items-center justify-center rounded-full bg-background shadow border hover:bg-muted"
                   >
                     <ChevronLeft size={18} />
                   </button>
@@ -110,20 +110,17 @@ export default function RestaurantPage() {
                     const Card = (
                       <div
                         className={`group relative min-w-65 sm:min-w-75 rounded-2xl 
-                                    bg-linear-to-br from-white to-blue-50
-                                    border border-neutral-200/70
+                                    bg-linear-to-br from-primary-foreground to-primary/10
+                                    border border-secondary
                                     p-4 sm:p-5 flex gap-4
                                     shadow-sm hover:shadow-lg
-                                    transition-all duration-300 ease-out
+                                    transition-all duration-300 ease-out hover:bg-primary/20
                                     ${popupContent ? "cursor-pointer hover:-translate-y-1" : "cursor-default"}`}
                       >
-                        {/* Soft Hover Glow */}
-                        <div className="absolute inset-0 rounded-2xl bg-neutral-100/40 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none" />
-
                         {/* Icon */}
                         <div
                           className="relative z-10 flex h-12 w-12 items-center justify-center 
-                                     rounded-xl bg-neutral-100 text-neutral-700 text-xl shrink-0
+                                     rounded-xl bg-primary-foreground text-neutral-700 text-xl shrink-0
                                      transition-transform duration-300 group-hover:scale-105"
                         >
                           {promo.icon}
@@ -131,7 +128,7 @@ export default function RestaurantPage() {
 
                         {/* Content */}
                         <div className="relative z-10">
-                          <h3 className="font-medium text-sm sm:text-base text-neutral-900 tracking-tight">
+                          <h3 className="font-medium text-sm sm:text-base text-primary tracking-tight">
                             {promo.title}
                           </h3>
 

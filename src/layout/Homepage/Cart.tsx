@@ -40,17 +40,17 @@ export function BasketSidebar() {
         <div className="rounded-2xl border border-gray-200 bg-linear-to-br from-white to-gray-50/50 p-12 shadow-sm backdrop-blur-sm">
           <div className="flex flex-col items-center justify-center text-center space-y-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-linear-to-br from-[#00ccbc]/20 to-[#00b3a6]/20 blur-2xl rounded-full" />
+              <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-primary/5 blur-2xl rounded-full" />
               <ShoppingBasket
-                className="relative h-20 w-20 text-gray-300"
+                className="relative h-20 w-20 text-primary"
                 strokeWidth={1.5}
               />
             </div>
             <div>
-              <p className="text-xl font-semibold text-gray-800 mb-1">
+              <p className="text-xl font-semibold text-primary mb-1">
                 Your basket is empty
               </p>
-              <p className="text-sm text-gray-500">Add items to get started</p>
+              <p className="text-sm text-muted-foreground">Add items to get started</p>
             </div>
           </div>
         </div>
@@ -134,15 +134,15 @@ export function BasketSidebar() {
         <div className="p-5 border-b border-gray-100 bg-linear-to-br from-gray-50 to-white shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-linear-to-br from-[#00ccbc] to-[#00b3a6] flex items-center justify-center shadow-sm">
+              <div className="h-10 w-10 rounded-xl bg-linear-to-br from-primary to-primary/50 flex items-center justify-center shadow-sm">
                 <ShoppingBasket
                   className="h-5 w-5 text-white"
                   strokeWidth={2}
                 />
               </div>
               <div>
-                <h2 className="font-bold text-lg text-gray-900">Your basket</h2>
-                <p className="text-xs text-gray-500">
+                <h2 className="font-bold text-lg text-primary">Your basket</h2>
+                <p className="text-xs text-muted-foreground">
                   {itemCount} {itemCount === 1 ? "item" : "items"}
                 </p>
               </div>
@@ -165,7 +165,7 @@ export function BasketSidebar() {
                     <h3 className="font-semibold text-gray-900 text-sm leading-snug">
                       {item.name}
                     </h3>
-                    <p className="text-sm font-medium text-[#00ccbc] mt-1">
+                    <p className="text-sm font-medium text-primary mt-1">
                       £{item.price.toFixed(2)}
                     </p>
                   </div>
@@ -211,13 +211,13 @@ export function BasketSidebar() {
           {/* Checkout Options */}
           <div className="p-5 border-t border-gray-100 space-y-4 bg-linear-to-b from-gray-50/50 to-white">
             <h3 className="font-bold text-sm text-gray-900 mb-3 flex items-center gap-2">
-              <Package className="h-4 w-4 text-[#00ccbc]" />
+              <Package className="h-4 w-4 text-primary" />
               Order Details
             </h3>
 
             {/* Delivery / Collection */}
             <div>
-              <label className="text-xs font-semibold text-gray-700 mb-2 flex uppercase tracking-wide">
+              <label className="text-xs font-semibold text-muted-foreground mb-2 flex uppercase tracking-wide">
                 Order Type
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -225,7 +225,7 @@ export function BasketSidebar() {
                   onClick={() => setOrderType("delivery")}
                   className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     orderType === "delivery"
-                      ? "bg-linear-to-br from-[#00ccbc] to-[#00b3a6] text-white shadow-md shadow-[#00ccbc]/30"
+                      ? "bg-linear-to-br from-primary to-primary/50 text-white shadow-md shadow-primary/30"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -235,7 +235,7 @@ export function BasketSidebar() {
                   onClick={() => setOrderType("collection")}
                   className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     orderType === "collection"
-                      ? "bg-linear-to-br from-[#00ccbc] to-[#00b3a6] text-white shadow-md shadow-[#00ccbc]/30"
+                      ? "bg-linear-to-br from-primary  to-primary/50 text-white shadow-md shadow-primary/30"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -247,7 +247,7 @@ export function BasketSidebar() {
             {/* Slot Time */}
             <div>
               <label className="text-xs font-semibold text-gray-700 mb-2  uppercase tracking-wide flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5 text-[#00ccbc]" />
+                <Clock className="h-3.5 w-3.5 text-primary" />
                 Preferred Time
               </label>
               <input
@@ -255,7 +255,7 @@ export function BasketSidebar() {
                 type="time"
                 value={slotTime}
                 onChange={(e) => setSlotTime(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm transition-all focus:border-[#00ccbc] focus:ring-2 focus:ring-[#00ccbc]/20"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </div>
 
@@ -263,7 +263,7 @@ export function BasketSidebar() {
             {orderType === "delivery" && (
               <div>
                 <label className="text-xs font-semibold text-gray-700 mb-2  uppercase tracking-wide flex items-center gap-2">
-                  <MapPin className="h-3.5 w-3.5 text-[#00ccbc]" />
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
                   Delivery Address
                 </label>
                 <input
@@ -271,7 +271,7 @@ export function BasketSidebar() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="123 Street, City, Postcode"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm placeholder:text-gray-400 transition-all focus:border-[#00ccbc] focus:ring-2 focus:ring-[#00ccbc]/20"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm placeholder:text-gray-400 transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
               </div>
             )}
@@ -279,14 +279,14 @@ export function BasketSidebar() {
             {/* Order Notes */}
             <div>
               <label className="text-xs font-semibold text-gray-700 mb-2  uppercase tracking-wide flex items-center gap-2">
-                <MessageSquare className="h-3.5 w-3.5 text-[#00ccbc]" />
+                <MessageSquare className="h-3.5 w-3.5 text-primary" />
                 Special Instructions
               </label>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Any allergies or preferences?"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none placeholder:text-gray-400 transition-all focus:border-[#00ccbc] focus:ring-2 focus:ring-[#00ccbc]/20"
+                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none placeholder:text-gray-400 transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                 rows={2}
               />
             </div>
@@ -304,7 +304,7 @@ export function BasketSidebar() {
             {/* Promo Code */}
             <div>
               <label className="text-xs font-semibold text-gray-700 mb-2  uppercase tracking-wide flex items-center gap-2">
-                <Tag className="h-3.5 w-3.5 text-[#00ccbc]" />
+                <Tag className="h-3.5 w-3.5 text-primary" />
                 Promo Code
               </label>
               <div className="flex gap-2">
@@ -313,25 +313,25 @@ export function BasketSidebar() {
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                   placeholder="Enter code"
-                  className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm promo-input placeholder:text-gray-400 transition-all focus:border-[#00ccbc] focus:ring-2 focus:ring-[#00ccbc]/20"
+                  className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm promo-input placeholder:text-gray-400 transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
-                <Button className="h-auto px-5 py-2.5 text-sm font-semibold bg-linear-to-br from-[#00ccbc] to-[#00b3a6] hover:from-[#00b3a6] hover:to-[#009e92] rounded-xl shadow-sm transition-all">
+                <Button className="h-auto px-5 py-2.5 text-sm font-semibold bg-linear-to-br from-primary to-primary/50 hover:from-primary/20 hover:to-primary rounded-xl shadow-sm transition-all">
                   Apply
                 </Button>
               </div>
             </div>
 
             {/* Applied Deals */}
-            {appliedDeals.length > 0 && (
-              <div className="p-3 bg-green-50 border border-green-200 rounded-xl">
-                <p className="text-xs font-semibold text-green-800 mb-1">
+            {/* {appliedDeals.length > 0 && ( */}
+              <div className="p-3 bg-primary-foreground border border-border rounded-xl">
+                <p className="text-xs font-semibold text-primary mb-1">
                   ✓ Deals Applied
                 </p>
-                <p className="text-xs text-green-700">
+                <p className="text-xs text-primary">
                   {appliedDeals.join(", ")}
                 </p>
               </div>
-            )}
+            {/* )} */}
           </div>
         </div>
 
@@ -364,7 +364,7 @@ export function BasketSidebar() {
             </div>
 
             <Button
-              className="w-full h-12 bg-linear-to-r from-[#00ccbc] to-[#00b3a6] hover:from-[#00b3a6] hover:to-[#009e92] text-white font-bold text-base rounded-xl shadow-lg shadow-[#00ccbc]/30 transition-all hover:shadow-xl hover:shadow-[#00ccbc]/40 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"
+              className="w-full h-12 bg-linear-to-r from-primary to-primary/20 hover:from-primary/5 hover:to-primary/10 text-white font-bold text-base rounded-xl shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"
               disabled={
                 subtotal < restaurantData.delivery.minimum &&
                 orderType === "delivery"

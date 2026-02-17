@@ -22,16 +22,15 @@ export default function PasswordSection() {
           placeholder="Current password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-cyan-500"
+          className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
         />
 
         <button
           disabled={!isValid}
           className={`px-4 py-2 rounded-lg transition cursor-pointer
-            ${
-              isValid
-                ? "bg-cyan-600 text-white hover:bg-cyan-700"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed"
+            ${isValid
+              ? "bg-primary text-white hover:bg-primary/80"
+              : "bg-gray-200 text-gray-500 cursor-not-allowed"
             }
           `}
         >
