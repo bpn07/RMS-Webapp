@@ -89,9 +89,7 @@ export default function RestaurantPage() {
                   <button
                     aria-label="Scroll left"
                     onClick={() => scroll("left")}
-                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-10
-                   h-8 w-8 items-center justify-center rounded-full
-                   bg-white shadow border hover:bg-muted"
+                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-11 h-8 w-8 items-center justify-center rounded-full bg-white shadow border hover:bg-muted"
                   >
                     <ChevronLeft size={18} />
                   </button>
@@ -169,9 +167,7 @@ export default function RestaurantPage() {
                   <button
                     aria-label="Scroll right"
                     onClick={() => scroll("right")}
-                    className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10
-                   h-8 w-8 items-center justify-center rounded-full
-                   bg-white shadow border hover:bg-muted"
+                    className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 items-center justify-center rounded-full bg-white shadow border hover:bg-muted"
                   >
                     <ChevronRight size={18} />
                   </button>

@@ -101,11 +101,11 @@ function InfoRow({
     >
       <Icon className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:scale-105 group-hover:text-black" />
 
-      <span className="flex-1 transition-colors duration-200 group-hover:text-black">
+      <span className="flex-1 transition-colors duration-200 group-hover:text-[#00ccbc]">
         {children}
       </span>
 
-      <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-black" />
+      <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-[#00ccbc]" />
     </button>
   );
 }
