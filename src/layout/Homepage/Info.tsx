@@ -99,13 +99,13 @@ function InfoRow({
       onClick={onClick}
       className="flex items-center gap-2 text-left w-full group transition-all hover:opacity-90 cursor-pointer"
     >
-      <Icon className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:scale-105 group-hover:text-black" />
+      <Icon className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:scale-105 group-hover:text-primary" />
 
-      <span className="flex-1 transition-colors duration-200 group-hover:text-[#00ccbc]">
+      <span className="flex-1 transition-colors duration-200 group-hover:text-primary">
         {children}
       </span>
 
-      <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-[#00ccbc]" />
+      <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary" />
     </button>
   );
 }
@@ -229,7 +229,7 @@ export function RestaurantInfo({
         {/* Group Order */}
         <Button
           variant="ghost"
-          className="gap-2 text-[#00ccbc] hover:text-[#00ccbc] hover:bg-[#00ccbc]/5 p-0"
+          className="gap-2 text-primary hover:text-primary hover:bg-primary-foreground p-0"
         >
           <Users className="h-5 w-5" />
           <span className="font-medium">Start group order</span>

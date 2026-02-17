@@ -63,7 +63,7 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-gray-50/50">
       {/* Hero Section */}
-      <header className="relative bg-cyan-500 pt-16 pb-32 overflow-hidden">
+      <header className="relative bg-primary pt-16 pb-32 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold text-white max-w-4xl">
             Frequently asked questions

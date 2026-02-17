@@ -30,7 +30,7 @@ export default function DeleteAccount() {
           type="text"
           aria-label="Confirm deletion"
           placeholder="Type 'DELETE' to confirm"
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-cyan-500"
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           value={confirmText}
           onChange={(e) => setConfirmText(e.target.value)}
         />

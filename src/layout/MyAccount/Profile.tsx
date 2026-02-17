@@ -12,7 +12,7 @@ export default function ProfileHeader({
   tabs,
 }: ProfileHeaderProps) {
   return (
-    <header className="bg-cyan-500 text-white">
+    <header className="bg-primary text-white">
       {/* Profile Info */}
       <div className="max-w-7xl mx-auto px-4 pt-6 pb-4 sm:pt-8 sm:pb-6">
         <h1 className="text-2xl sm:text-4xl font-bold mb-1 sm:mb-2">Don Dai</h1>
@@ -28,8 +28,8 @@ export default function ProfileHeader({
               onClick={() => onTabChange(tab.id)}
               className={`shrink-0 px-4 rounded-full text-sm sm:text-base font-medium transition-all ${
                 activeTab === tab.id
-                  ? "bg-white text-cyan-500 shadow"
-                  : "text-white/90 hover:text-white hover:bg-cyan-400"
+                  ? "bg-white text-primary shadow"
+                  : "text-white/90 hover:text-white hover:bg-muted-foreground"
               }
               `}
             >

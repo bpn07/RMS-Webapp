@@ -68,7 +68,7 @@ export default function BasketDrawer({ onClose }: BasketDrawerProps) {
           <span>Total</span>
           <span>${total.toFixed(2)}</span>
         </div>
-        <Button className="w-full bg-[#00ccbc] hover:bg-[#00b3a9] text-white">
+        <Button className="w-full bg-primary hover:bg-[#00b3a9] text-white">
           Checkout
         </Button>
       </div> */}

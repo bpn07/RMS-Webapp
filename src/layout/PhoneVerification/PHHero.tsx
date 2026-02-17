@@ -42,7 +42,7 @@ export default function PHHero() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+1 234 567 8900"
-            className="w-full border border-gray-300 rounded-lg py-3 px-4 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+            className="w-full border border-gray-300 rounded-lg py-3 px-4 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
           />
         </div>
 
@@ -50,7 +50,7 @@ export default function PHHero() {
         <button
           type="button"
           onClick={handleSendOTP}
-          className="w-full cursor-pointer bg-teal-500! hover:bg-teal-600! text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
+          className="w-full cursor-pointer bg-primary/85 hover:bg-primary text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
         >
           Send OTP
         </button>

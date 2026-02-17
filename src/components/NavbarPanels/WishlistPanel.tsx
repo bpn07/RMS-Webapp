@@ -52,7 +52,7 @@ export default function WishlistDrawer({ onClose }: WishlistDrawerProps) {
               flex-1 py-2 rounded-full text-sm font-medium
               ${
                 activeTab === tab
-                  ? "bg-[#00ccbc] text-white"
+                  ? "bg-primary text-white"
                   : "bg-gray-100 text-gray-700"
               }
             `}

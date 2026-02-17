@@ -21,7 +21,7 @@ export function MobileBasket() {
     <>
       {/* Mobile basket button */}
       <Button
-        className="fixed bottom-0 left-0 right-0 z-50 lg:hidden w-full h-16 rounded-none bg-[#00ccbc] hover:bg-[#00b3a6] text-white flex items-center justify-between px-6"
+        className="fixed bottom-0 left-0 right-0 z-50 lg:hidden w-full h-16 rounded-none bg-primary hover:bg-[#00b3a6] text-white flex items-center justify-between px-6"
         onClick={() => setOpen(true)}
       >
         <div className="flex items-center gap-3">
@@ -114,7 +114,7 @@ export function MobileBasket() {
                 <span className="font-medium">Subtotal</span>
                 <span className="font-bold">£{subtotal.toFixed(2)}</span>
               </div>
-              <Button className="w-full bg-[#00ccbc] hover:bg-[#00b3a6] text-white">
+              <Button className="w-full bg-primary hover:bg-[#00b3a6] text-white">
                 Checkout
               </Button>
             </div>

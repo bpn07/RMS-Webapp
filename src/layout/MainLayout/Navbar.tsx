@@ -11,9 +11,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import WishlistDrawer from "@/components/NavbarPanels/WishlistPanel";
+import BasketDrawer from "@/components/NavbarPanels/BasketPanel";
+import ThemeColorToggle from "@/components/ThemeColorToggle";
+import { ThemeModeToggle } from "@/components/ThemeModeToggle";
 
-import WishlistDrawer from "./NavbarPanels/WishlistPanel";
-import BasketDrawer from "./NavbarPanels/BasketPanel";
 
 interface HeaderProps {
   searchPlaceholder?: string;
@@ -39,7 +41,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 sm:gap-4 px-2 sm:px-4">
           {/* Logo */}
           <Link href="/" className="shrink-0">
-            <span className="text-lg sm:text-xl font-bold text-[#00ccbc]">
+            <span className="text-lg sm:text-xl font-bold text-primary">
               Kathmandu
             </span>
           </Link>
@@ -50,7 +52,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
             <input
               type="text"
               placeholder={searchPlaceholder}
-              className="h-10 w-full rounded-md border bg-background pl-9 pr-4 text-sm outline-none focus:ring-2 focus:ring-[#00ccbc]"
+              className="h-10 w-full rounded-md border bg-background pl-9 pr-4 text-sm outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
@@ -65,7 +67,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               onClick={() => setWishlistOpen(true)}
               className="px-2 sm:px-4"
             >
-              <Heart className="h-4 w-4 text-[#00ccbc]" />
+              <Heart className="h-4 w-4 text-primary" />
             </Button>
 
             {/* Cart */}
@@ -77,7 +79,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               onClick={() => setBasketOpen(true)}
               className="relative px-2 sm:px-4"
             >
-              <ShoppingBag className="h-4 w-4 text-[#00ccbc]" />
+              <ShoppingBag className="h-4 w-4 text-primary" />
               {cartCount > 0 && (
                 <span className="ml-1 text-sm font-medium">{cartCount}</span>
               )}
@@ -94,7 +96,8 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
             >
               <Search className="h-5 w-5" />
             </Button>
-
+            <ThemeColorToggle />
+            <ThemeModeToggle />
             {/* Account Dropdown (All Screens) */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -119,7 +122,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                   <DropdownMenuItem
                     key={item.href}
                     asChild
-                    className="px-4 py-3 rounded-md text-gray-700 hover:bg-[#00ccbc]/10 hover:text-[#00ccbc] focus:bg-[#00ccbc]/20 focus:text-[#00ccbc] transition-colors"
+                    className="px-4 py-3 rounded-md text-gray-700 hover:bg-primary/10 hover:text-primary focus:bg-primary/20 focus:text-primary transition-colors"
                   >
                     <Link href={item.href}>{item.label}</Link>
                   </DropdownMenuItem>
@@ -168,6 +171,8 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
         </>
       )}
 
+
+
       {/* Mobile Search */}
       {mobileSearchOpen && (
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm md:hidden">
@@ -181,7 +186,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                 placeholder={searchPlaceholder}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="h-11 w-full rounded-md border bg-background pl-9 pr-10 text-sm outline-none focus:ring-2 focus:ring-[#00ccbc]"
+                className="h-11 w-full rounded-md border bg-background pl-9 pr-10 text-sm outline-none focus:ring-2 focus:ring-primary"
               />
 
               <button
