@@ -33,10 +33,10 @@ const ThemeColorToggle = () => {
             defaultValue={themeColor}
 
         >
-            <SelectTrigger className="w-45">
+            <SelectTrigger className="w-45 capitalize">
                 <SelectValue placeholder="Select" />
             </SelectTrigger>
-            <SelectContent className="border-muted bg-white ">
+            <SelectContent className="border-muted bg-white capitalize">
                 {createSelectItems()}
             </SelectContent>
         </Select>

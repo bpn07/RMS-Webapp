@@ -15,7 +15,7 @@ import WishlistDrawer from "@/components/NavbarPanels/WishlistPanel";
 import BasketDrawer from "@/components/NavbarPanels/BasketPanel";
 import ThemeColorToggle from "@/components/ThemeColorToggle";
 import { ThemeModeToggle } from "@/components/ThemeModeToggle";
-
+import Image from "next/image";
 
 interface HeaderProps {
   searchPlaceholder?: string;
@@ -37,28 +37,60 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
 
   return (
     <>
-      <header className="border-b bg-white sticky top-0 z-30">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 sm:gap-4 px-2 sm:px-4">
-          {/* Logo */}
-          <Link href="/" className="shrink-0">
-            <span className="text-lg sm:text-xl font-bold text-primary">
-              Kathmandu
-            </span>
-          </Link>
+      <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur-2xl shadow-sm">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
 
-          {/* Desktop Search */}
-          <div className="relative flex-1 max-w-md hidden md:block">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          {/* LEFT SECTION */}
+          <div className="flex items-center gap-12">
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-4 shrink-0">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-muted/40 border">
+                <Image
+                  src="data:image/png;base64,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"
+                  alt="Kathmandu Logo"
+                  className="h-8 w-8 object-contain"
+                />
+              </div>
+
+              <span className="text-2xl font-semibold tracking-tight text-primary">
+                Kathmandu
+              </span>
+            </Link>
+
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
+              <Link
+                href="/"
+                className="relative group text-foreground/60 hover:text-primary transition"
+              >
+                Menu
+                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+              </Link>
+
+              <Link
+                href="/reservation"
+                className="relative group text-foreground/60 hover:text-primary transition"
+              >
+                Reserve Table
+                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+              </Link>
+            </nav>
+          </div>
+
+          {/* CENTER SEARCH */}
+          <div className="relative hidden md:block w-full max-w-lg">
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
               placeholder={searchPlaceholder}
-              className="h-10 w-full rounded-md border bg-background pl-9 pr-4 text-sm outline-none focus:ring-2 focus:ring-primary"
+              className="h-11 w-full rounded-full border border-border bg-muted/30 pl-10 pr-5 text-sm outline-none focus:ring-2 focus:ring-primary/30 transition-all duration-200"
             />
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-1 sm:gap-4">
-            {/* Wishlist */}
+          {/* RIGHT ACTIONS */}
+          <div className="flex items-center gap-3">
+
             <Button
               type="button"
               aria-label="Open wishlist"
@@ -66,11 +98,9 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               size="sm"
               onClick={() => setWishlistOpen(true)}
               className="px-2 sm:px-4"
-            >
-              <Heart className="h-4 w-4 text-primary" />
+            >              <Heart className="h-4 w-4 text-primary" />
             </Button>
 
-            {/* Cart */}
             <Button
               type="button"
               aria-label="Open basket"
@@ -78,78 +108,54 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               size="sm"
               onClick={() => setBasketOpen(true)}
               className="relative px-2 sm:px-4"
-            >
-              <ShoppingBag className="h-4 w-4 text-primary" />
+            >              <ShoppingBag className="h-4 w-4 text-primary" />
               {cartCount > 0 && (
-                <span className="ml-1 text-sm font-medium">{cartCount}</span>
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                  {cartCount}
+                </span>
               )}
             </Button>
 
-            {/* Mobile Search */}
-            <Button
-              type="button"
-              aria-label="Open search"
-              variant="ghost"
-              size="sm"
-              className="md:hidden px-2"
-              onClick={() => setMobileSearchOpen(true)}
-            >
-              <Search className="h-5 w-5" />
-            </Button>
-            <ThemeColorToggle />
-            <ThemeModeToggle />
-
-            <Link href={"/reservation"} className="text-sm hover:text-primary">Reserve Table</Link>
-            {/* Account Dropdown (All Screens) */}
+            <div className="ml-2 h-6 w-px bg-border hidden md:block" />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  type="button"
-                  aria-label="Open account menu"
-                  variant="ghost"
-                  size="sm"
-                  className="gap-2 px-2 sm:px-4"
-                >
+                <Button variant="ghost" size="icon" className="hover:bg-muted/40">
                   <User className="h-4 w-4" />
-                  <span className="hidden md:inline">Account</span>
                 </Button>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
                 align="end"
-                sideOffset={8}
-                className="w-56 rounded-lg bg-white/95 backdrop-blur-md shadow-xl border border-gray-200 p-1"
+                className="w-60 rounded-2xl border bg-background shadow-xl p-3"
               >
                 {navItems.map((item) => (
-                  <DropdownMenuItem
-                    key={item.href}
-                    asChild
-                    className="px-4 py-3 rounded-md text-gray-700 hover:bg-primary/10 hover:text-primary focus:bg-primary/20 focus:text-primary transition-colors"
-                  >
-                    <Link href={item.href}>{item.label}</Link>
+                  <DropdownMenuItem key={item.href} asChild className="rounded-lg">
+                    <Link href={item.href} className="px-3 py-2">
+                      {item.label}
+                    </Link>
                   </DropdownMenuItem>
                 ))}
 
-                <div className="border-t border-gray-200 my-1" />
+                <div className="border-t my-3" />
+                <div className="px-3">
+                  <span className="text-sm">Theme:</span>
+                  <div className="flex items-center justify-between gap-4 text-sm mt-2">
+                    <ThemeColorToggle />
+                    <ThemeModeToggle />
+                  </div>
+                </div>
 
-                <DropdownMenuItem
-                  asChild
-                  className="px-4 py-3 rounded-md text-red-600 hover:bg-red-50 focus:bg-red-100"
-                >
-                  <button
-                    type="button"
-                    aria-label="Logout"
-                    className="w-full text-left"
-                    onClick={() => console.log("Logout clicked")}
-                  >
-                    Logout
-                  </button>
+                <div className="border-t my-3" />
+
+                <DropdownMenuItem className="rounded-lg text-destructive px-3 py-2">
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
       </header>
+
 
       {/* Wishlist Drawer */}
       {wishlistOpen && (
@@ -173,27 +179,21 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
         </>
       )}
 
-
-
       {/* Mobile Search */}
       {mobileSearchOpen && (
-        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm md:hidden">
-          <div className="absolute top-0 left-0 right-0 border-b bg-background p-3">
-            <div className="relative flex items-center gap-2">
+        <div className="fixed inset-0 z-50 bg-background/90 backdrop-blur-md md:hidden">
+          <div className="border-b p-4">
+            <div className="relative flex items-center">
               <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
-
               <input
                 autoFocus
                 type="text"
                 placeholder={searchPlaceholder}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="h-11 w-full rounded-md border bg-background pl-9 pr-10 text-sm outline-none focus:ring-2 focus:ring-primary"
+                className="h-11 w-full rounded-full border bg-muted/40 pl-9 pr-10 text-sm outline-none focus:ring-2 focus:ring-primary"
               />
-
               <button
-                type="button"
-                aria-label="Close search"
                 onClick={() => setMobileSearchOpen(false)}
                 className="absolute right-3 text-muted-foreground"
               >
