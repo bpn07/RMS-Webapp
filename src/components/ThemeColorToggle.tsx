@@ -2,6 +2,7 @@ import { useThemeContext } from "@/context/theme-data-provider";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { ThemeColors } from "@/types/theme-types";
 
 const availableThemeColors = [
     { name: "red", light: "bg-rose-660", dark: "bg-rose-760" },

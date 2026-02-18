@@ -123,12 +123,13 @@ export function RestaurantInfo({
     "latest",
   );
 
-  const [addresses, setAddresses] = useState([
+  const addresses: string[] = [
     "123 Baker Street, London",
     "45 Oxford Road, Manchester",
     "10 Downing Street, London",
     "1 High Street, Birmingham",
-  ]);
+
+  ];
 
   const [selectedAddress, setSelectedAddress] = useState(addresses[0]);
 
@@ -192,11 +193,10 @@ export function RestaurantInfo({
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
-                  className={`h-4 w-4 ${
-                    idx < Math.round(rating.score)
-                      ? "text-yellow-400 fill-yellow-400"
-                      : "text-gray-300"
-                  }`}
+                  className={`h-4 w-4 ${idx < Math.round(rating.score)
+                    ? "text-yellow-400 fill-yellow-400"
+                    : "text-gray-300"
+                    }`}
                 />
               ))}
             </div>
@@ -496,11 +496,10 @@ export function RestaurantInfo({
             {Array.from({ length: 5 }).map((_, idx) => (
               <Star
                 key={idx}
-                className={`h-5 w-5 ${
-                  idx < Math.round(averageRating)
-                    ? "text-yellow-400"
-                    : "text-gray-300"
-                }`}
+                className={`h-5 w-5 ${idx < Math.round(averageRating)
+                  ? "text-yellow-400"
+                  : "text-gray-300"
+                  }`}
               />
             ))}
             <span className="font-semibold">
@@ -558,11 +557,10 @@ export function RestaurantInfo({
                         {Array.from({ length: 5 }).map((_, idx) => (
                           <Star
                             key={idx}
-                            className={`h-4 w-4 ${
-                              idx < review.rating
-                                ? "text-yellow-400 fill-yellow-400"
-                                : "text-gray-300"
-                            }`}
+                            className={`h-4 w-4 ${idx < review.rating
+                              ? "text-yellow-400 fill-yellow-400"
+                              : "text-gray-300"
+                              }`}
                           />
                         ))}
                       </div>

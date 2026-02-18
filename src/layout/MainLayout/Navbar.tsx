@@ -98,6 +98,8 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
             </Button>
             <ThemeColorToggle />
             <ThemeModeToggle />
+
+            <Link href={"/reservation"} className="text-sm hover:text-primary">Reserve Table</Link>
             {/* Account Dropdown (All Screens) */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
