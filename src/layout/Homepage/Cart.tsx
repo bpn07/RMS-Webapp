@@ -42,7 +42,7 @@ export function BasketSidebar() {
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-primary/5 blur-2xl rounded-full" />
               <ShoppingBasket
-                className="relative h-20 w-20 text-primary"
+                className="relative h-20 w-20 text-primary animate-pulse"
                 strokeWidth={1.5}
               />
             </div>
