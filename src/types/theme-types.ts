@@ -1,5 +1,6 @@
-type ThemeColors = "blue" | "red" | "orange" | "green"
-interface ThemeColorStateParams{
-    themeColor: ThemeColors;
-    setThemeColor : React.Dispatch<React.SetStateAction<ThemeColors>>
+export type ThemeColors = "blue" | "red" | "orange" | "green";
+
+export interface ThemeColorStateParams {
+  themeColor: ThemeColors;
+  setThemeColor: React.Dispatch<React.SetStateAction<ThemeColors>>;
 }

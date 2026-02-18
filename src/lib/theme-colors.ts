@@ -1,3 +1,5 @@
+import { ThemeColors } from "@/types/theme-types";
+
 export const themes = {
   green: {
     light: {
