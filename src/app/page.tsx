@@ -3,7 +3,6 @@
 import { RestaurantHero } from "@/layout/Homepage/HeroSection";
 import { RestaurantInfo } from "@/layout/Homepage/Info";
 import { CategoryNav } from "@/layout/Homepage/MenuNav";
-import { MenuItemCard } from "@/layout/Homepage/MenuItems";
 import { BasketSidebar } from "@/layout/Homepage/Cart";
 import { MobileBasket } from "@/layout/Homepage/MobileBasket";
 import { restaurantData } from "@/lib/restuarant-data";
@@ -18,6 +17,7 @@ import { PROMOTION_POPUPS } from "@/layout/Homepage/PromoPopups";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { FirstTimePopup } from "@/components/FirstTimePopup";
+import { MenuItemCard } from "@/layout/Homepage/MenuItems";
 
 export default function RestaurantPage() {
   const popularSection = restaurantData.categories.find(
