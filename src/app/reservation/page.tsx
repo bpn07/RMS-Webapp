@@ -26,22 +26,21 @@ const PREORDER_ITEMS = [
     id: "laphing",
     name: "Laphing",
     price: 180,
-    image: "https://dps.dpschool.edu.np/pgm/wp-content/uploads/sites/5/2023/04/laphing.jpg",
+    image: "/food.png",
   },
   {
     id: "pizza",
     name: "Mragertia Pizza",
     price: 450,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP0HbRY0SsECXq3XHqjXUBw3CqK1VfE5PX1w&s",
+    image: "/food.png",
   },
   {
     id: "chowmein",
     name: "Egg Chowmein",
     price: 220,
-    image: "https://i.ytimg.com/vi/XsCh1DrvBw4/maxresdefault.jpg",
+    image: "/food.png",
   },
 ];
-
 
 const OPENING_TIME = "10:00";
 const CLOSING_TIME = "22:00";
@@ -88,9 +87,7 @@ export default function ReservationPage() {
       const exists = prev.find((item) => item.id === id);
       if (exists) {
         return prev.map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
         );
       }
       return [...prev, { id, quantity: 1 }];
@@ -101,14 +98,11 @@ export default function ReservationPage() {
     setSelectedItems((prev) =>
       prev
         .map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
   };
-
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState<"success" | "error">("success");
@@ -120,9 +114,8 @@ export default function ReservationPage() {
 
   const visibleSlots = timeSlots.slice(
     slotPage * SLOTS_PER_PAGE,
-    slotPage * SLOTS_PER_PAGE + SLOTS_PER_PAGE
+    slotPage * SLOTS_PER_PAGE + SLOTS_PER_PAGE,
   );
-
 
   const handleReservation = (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,24 +137,22 @@ export default function ReservationPage() {
       `Table for ${people} people
 Date: ${date}
 Time: ${time}
-${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
+${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`,
     );
     setAlertOpen(true);
   };
 
-
   return (
     <div className="min-h-screen bg-linear-to-b from-primary/5 to-background pb-24">
-      <div className="flex flex-col items-center justify-center pt-24 mb-18">
+      <div className="flex flex-col items-center justify-center pt-24 mb-18 px-3">
         <h1 className="text-3xl md:text-5xl font-extrabold">
           Reserve Your Table
         </h1>
-        <p className="mt-3 text-lg max-w-xl opacity-90 ">
+        <p className="mt-3 text-lg max-w-xl opacity-90 text-center">
           Book your table and optionally pre-order food for a seamless visit.
         </p>
       </div>
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
-
         {/* LEFT SIDE – Offers */}
         <div className="space-y-6">
           <h2 className="text-3xl font-semibold tracking-tight">
@@ -170,9 +161,7 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
 
           <div className="space-y-4">
             <div className="border rounded-2xl p-6 bg-background">
-              <p className="text-sm font-medium text-primary">
-                Early Bird
-              </p>
+              <p className="text-sm font-medium text-primary">Early Bird</p>
               <p className="text-sm text-muted-foreground mt-1">
                 20% off pre-orders before 6 PM
               </p>
@@ -194,17 +183,13 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
           <form onSubmit={handleReservation} className="space-y-6">
             {/* PEOPLE */}
             <div className="space-y-3">
-              <Label className="text-sm font-medium">
-                Number of guests
-              </Label>
+              <Label className="text-sm font-medium">Number of guests</Label>
 
               <Select
                 value={people ? String(people) : undefined}
                 onValueChange={(value) => setPeople(Number(value))}
               >
-                <SelectTrigger
-                  className="w-full min-h-12 rounded-2xl border text-sm font-medium bg-white! hover:border-primary/40 focus:ring-2 focus:ring-primary/30 transition-all"
-                >
+                <SelectTrigger className="w-full min-h-12 rounded-2xl border text-sm font-medium bg-white! hover:border-primary/40 focus:ring-2 focus:ring-primary/30 transition-all">
                   <SelectValue placeholder="Select no. of people" />
                 </SelectTrigger>
 
@@ -249,10 +234,11 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
                       key={slot}
                       onClick={() => setTime(slot)}
                       className={`h-12 rounded-2xl border text-sm font-semibold transition-all duration-200
-                         ${isSelected
-                          ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
-                          : "bg-background hover:bg-primary/10 hover:border-primary/40"
-                        }
+                         ${
+                           isSelected
+                             ? "bg-primary text-primary-foreground border-primary shadow-md scale-105"
+                             : "bg-background hover:bg-primary/10 hover:border-primary/40"
+                         }
                           `}
                     >
                       {slot}
@@ -299,14 +285,12 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
                   }}
                   className="mt-1"
                 />
-                <div >
+                <div>
                   <p className="font-semibold">Pre-order food</p>
                   <p className="text-xs text-muted-foreground">
                     Optional - skip and order later
                   </p>
                 </div>
-
-
               </div>
 
               {preOrderEnabled && (
@@ -333,7 +317,6 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
                 </div>
               )}
             </div>
-
 
             {/* AGREE */}
             <div className="flex items-center gap-3 pt-4">
@@ -378,6 +361,8 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
                     <Image
                       src={item.image}
                       alt={item.name}
+                      height={10}
+                      width={10}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -425,7 +410,6 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
               Confirm Pre-order
             </Button>
           </div>
-
         </DialogContent>
       </Dialog>
 
@@ -438,9 +422,7 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`
                 alertType === "success" ? "text-green-600" : "text-red-600"
               }
             >
-              {alertType === "success"
-                ? "Reservation Confirmed "
-                : "Error "}
+              {alertType === "success" ? "Reservation Confirmed " : "Error "}
             </DialogTitle>
           </DialogHeader>
 
