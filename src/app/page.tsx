@@ -197,7 +197,7 @@ export default function RestaurantPage() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {category.name}
                   </h2>
-                  <div className="w-full space-y-2 sm:space-y-3 flex flex-wrap items-start gap-8">
+                  <div className="w-full space-y-2 sm:space-y-3 flex flex-wrap items-start">
                     {category.items.map((item) => (
                       <MenuItemCard key={item.id} item={item} />
                     ))}

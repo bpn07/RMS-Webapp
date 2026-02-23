@@ -2,29 +2,25 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Plus, Minus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Plus, Minus, ShoppingBag, X, Clock, Star } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { MenuItem } from "@/lib/restuarant-data";
 import { useBasket } from "@/hooks/useBasket";
-import { BiSolidDish, BiSolidStar } from "react-icons/bi";
-import { LuClock2 } from "react-icons/lu";
+// import { BiSolidDish } from "react-icons/bi";
+import { Button } from "@/components/ui/button";
 
 interface MenuItemCardProps {
   item: MenuItem;
-  isHorizontal?: boolean;
 }
 
-export function MenuItemCard({ item, isHorizontal = false }: MenuItemCardProps) {
+export function MenuItemCard({ item }: MenuItemCardProps) {
   const addItem = useBasket((state) => state.addItem);
-
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
@@ -32,160 +28,161 @@ export function MenuItemCard({ item, isHorizontal = false }: MenuItemCardProps) 
     for (let i = 0; i < quantity; i++) {
       addItem(item);
     }
-
     setOpen(false);
     setQuantity(1);
   };
 
-  const dialog = (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild></DialogTrigger>
+  // const ImagePlaceholder = () => (
+  //   <div className="absolute inset-0 flex items-center justify-center bg-blue-50">
+  //     <BiSolidDish className="text-blue-200 text-5xl" />
+  //   </div>
+  // );
 
-      <DialogContent className="sm:max-w-sm">
-        <DialogHeader>
-          <DialogTitle>{item.name}</DialogTitle>
-        </DialogHeader>
+  return (
+    <>
+      <div
+        className="group relative flex flex-row items-center gap-3 rounded-2xl bg-white border border-gray-100 p-3 hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer w-full"
+        onClick={() => setOpen(true)}
+      >
+        {/* Image */}
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-blue-50">
+          {/* <ImagePlaceholder /> */}
+          <Image
+            src={item.image || "/placeholder.svg"}
+            alt={item.name}
+            fill
+            className="object-cover z-10 group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        </div>
 
-        <div className="flex flex-col gap-3 mt-2">
-          <div className="rounded-lg object-cover w-full h-52 bg-gray-200 overflow-hidden">
-            {/* <Image
-          src={item.image || "/placeholder.svg"}
-          alt={item.name}
-          width={100}
-          height={100}
-          className="object-cover w-full"
-        /> */}
-            <div className="w-full h-full flex items-center justify-center">
-              <BiSolidDish size={100} className="text-gray-400" />
-            </div>
-          </div>
+        {/* Text */}
+        <div className="flex flex-col flex-1 min-w-0 gap-0.5">
+          <h3 className="font-semibold text-sm sm:text-base text-gray-900 line-clamp-1">
+            {item.name}
+          </h3>
 
           {item.description && (
-            <p className="text-sm text-muted-foreground">{item.description}</p>
+            <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed">
+              {item.description}
+            </p>
           )}
 
-          <div className="flex items-center justify-between">
-            <p className="font-medium text-base">£{item.price.toFixed(2)}</p>
-
-            <div className="flex items-center gap-2 border rounded-lg px-2 py-1">
-              <Button
-                size="icon"
-                variant="ghost"
-                className="h-7 w-7"
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              >
-                <Minus className="h-3 w-3" />
-              </Button>
-
-              <span className="w-5 text-center text-sm font-medium">
-                {quantity}
-              </span>
-
-              <Button
-                size="icon"
-                variant="ghost"
-                className="h-7 w-7"
-                onClick={() => setQuantity((q) => q + 1)}
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
+          <div className="flex items-center gap-3 mt-1 text-xs text-gray-400">
+            <div className="flex items-center gap-0.5">
+              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+              <span className="font-medium text-gray-600">4.2</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              <span>20–30m</span>
             </div>
           </div>
         </div>
 
-        <DialogFooter className="flex justify-end gap-2 mt-4">
-          <Button variant="outline" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>
-
-          <Button onClick={handleAddToCart}>Add to Cart</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-
-  const verticalCard = (
-    <div className="w-60 h-fit flex flex-col rounded-2xl bg-white p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-      <div className="relative w-full h-44 rounded-xl overflow-hidden shrink-0">
-        {/* <Image
-          src={item.image || "/placeholder.svg"}
-          alt={item.name}
-          fill
-          className="object-cover"
-        /> */}
-        <div className="w-full h-full flex bg-gray-200 items-center justify-center">
-          <BiSolidDish size={100} className="text-gray-400" />
-        </div>
-      </div>
-
-      <div className="mt-3 flex flex-col flex-1">
-        <h3 className="font-semibold text-sm leading-tight line-clamp-1 min-h-5">
-          {item.name}
-        </h3>
-
-        {item.description && (
-          <p className="text-xs text-gray-500 line-clamp-2 mt-1 h-9">
-            <span className="w-full h-full my-auto">
-            {item.description}
-          </span>
+        {/* Price + Add */}
+        <div className="flex flex-col items-end justify-between h-full gap-2 shrink-0">
+          <p className="font-bold text-sm text-gray-900">
+            £{item.price.toFixed(2)}
           </p>
-        )}
-
-        <div className="flex items-center justify-between text-xs text-gray-600 mt-2">
-          <div className="flex items-center gap-1">
-            <BiSolidStar className="text-yellow-500 text-xs" />
-            <span>4.2</span>
-          </div>
-
-          <div className="flex items-center gap-1">
-            <LuClock2 className="text-xs" />
-            <span>20-30 mins</span>
-          </div>
-        </div>
-
-        <div className="mt-auto pt-3 flex items-center justify-between">
-          <p className="font-bold text-sm">£{item.price.toFixed(2)}</p>
-
-          <Button
-            size="sm"
-            className="rounded-full px-4 text-xs font-medium"
-            onClick={() => setOpen(true)}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(true);
+            }}
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 hover:bg-blue-600 active:scale-90 text-white shadow-sm shadow-blue-200 transition-all duration-150"
+            aria-label={`Add ${item.name} to cart`}
           >
-            Add
-          </Button>
+            <Plus className="h-4 w-4" />
+          </button>
         </div>
       </div>
 
-      {dialog}
-    </div>
+      {/* ── Dialog ── */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <span />
+        </DialogTrigger>
+
+        <DialogContent className="w-[92vw] max-w-sm rounded-2xl p-0 overflow-hidden border-0 shadow-2xl gap-0">
+          {/* Image Section */}
+          <div className="relative w-full h-48 sm:h-56 bg-blue-50">
+            <Image
+              src={item.image || "/placeholder.svg"}
+              alt={item.name}
+              fill
+              className="object-cover z-10"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = "none";
+              }}
+            />
+
+            <Button
+              onClick={() => setOpen(false)}
+              className="absolute top-3 right-3 z-20 bg-white/90 backdrop-blur-sm rounded-full p-1.5 shadow-md hover:bg-white transition-colors"
+            >
+              <X className="h-4 w-4 text-gray-600" />
+            </Button>
+          </div>
+
+          {/* Content Section */}
+          <div className="p-4 sm:p-5 flex flex-col gap-4">
+            {/* REQUIRED FOR ACCESSIBILITY */}
+            <DialogHeader className="space-y-1 text-left">
+              <DialogTitle className="text-base sm:text-lg font-bold text-gray-900 leading-tight">
+                {item.name}
+              </DialogTitle>
+
+              {item.description && (
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  {item.description}
+                </p>
+              )}
+            </DialogHeader>
+
+            {/* Bottom Controls */}
+            <div className="flex items-center justify-between">
+              {/* Quantity Selector */}
+              <div className="flex items-center bg-gray-100 rounded-xl overflow-hidden">
+                <button
+                  aria-label="decrease quantity"
+                  className="h-9 w-9 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors disabled:opacity-40"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  disabled={quantity <= 1}
+                >
+                  <Minus className="h-3.5 w-3.5" />
+                </button>
+
+                <span className="w-8 text-center text-sm font-semibold text-gray-900">
+                  {quantity}
+                </span>
+
+                <button
+                  aria-label="Increase quantity"
+                  className="h-9 w-9 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                  onClick={() => setQuantity((q) => q + 1)}
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                </button>
+              </div>
+
+              {/* Add To Cart */}
+              <button
+                onClick={() => {
+                  handleAddToCart();
+                  setOpen(false);
+                }}
+                className="flex items-center gap-2 h-9 px-4 bg-blue-500 hover:bg-blue-600 active:scale-95 text-white text-sm font-semibold rounded-xl transition-all duration-150 shadow-sm shadow-blue-200"
+              >
+                <ShoppingBag className="h-4 w-4" />
+                Add · £{(item.price * quantity).toFixed(2)}
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
-
-  const horizontalCard = (
-    <div className="flex flex-col rounded-lg border h-60 bg-white overflow-hidden hover:shadow-md transition-shadow">
-      <Image
-        src={item.image || "/placeholder.svg"}
-        alt={item.name}
-        width={200}
-        height={150}
-        className="w-full h-28 sm:h-32 object-cover"
-      />
-      <div className="p-2 sm:p-3 flex flex-col flex-1">
-        <h3 className="font-medium text-xs sm:text-sm line-clamp-2">
-          {item.name}
-        </h3>
-        {item.description && (
-          <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-            {item.description}
-          </p>
-        )}
-        <div className="flex items-center justify-between mt-auto pt-2 sm:pt-3">
-          <p className="font-medium text-sm">£{item.price.toFixed(2)}</p>
-
-          {dialog}
-        </div>
-      </div>
-    </div>
-  );
-
-  return isHorizontal ? horizontalCard : verticalCard;
 }

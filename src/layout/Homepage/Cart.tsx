@@ -36,7 +36,7 @@ export function BasketSidebar() {
   const appliedDeals: string[] = [];
   if (items.length === 0) {
     return (
-      <div className="sticky top-34 w-full h-fit max-w-full">
+      <div className="sticky top-38 w-full h-fit max-w-full">
         <div className="rounded-2xl border border-gray-200 bg-linear-to-br from-white to-gray-50/50 p-12 shadow-sm backdrop-blur-sm">
           <div className="flex flex-col items-center justify-center text-center space-y-4">
             <div className="relative">
@@ -50,7 +50,9 @@ export function BasketSidebar() {
               <p className="text-xl font-semibold text-primary mb-1">
                 Your basket is empty
               </p>
-              <p className="text-sm text-muted-foreground">Add items to get started</p>
+              <p className="text-sm text-muted-foreground">
+                Add items to get started
+              </p>
             </div>
           </div>
         </div>
@@ -60,7 +62,7 @@ export function BasketSidebar() {
 
   return (
     <div
-      className="sticky top-30 w-full max-w-full"
+      className="sticky top-36 w-full max-w-full"
       style={{ maxHeight: "calc(100vh - 8rem)" }}
     >
       <style jsx>{`
@@ -223,19 +225,21 @@ export function BasketSidebar() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setOrderType("delivery")}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${orderType === "delivery"
-                    ? "bg-linear-to-br from-primary to-primary/50 text-white shadow-md shadow-primary/30"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    orderType === "delivery"
+                      ? "bg-linear-to-br from-primary to-primary/50 text-white shadow-md shadow-primary/30"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
                 >
                   Delivery
                 </button>
                 <button
                   onClick={() => setOrderType("collection")}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${orderType === "collection"
-                    ? "bg-linear-to-br from-primary  to-primary/50 text-white shadow-md shadow-primary/30"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    orderType === "collection"
+                      ? "bg-linear-to-br from-primary  to-primary/50 text-white shadow-md shadow-primary/30"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
                 >
                   Collection
                 </button>
@@ -325,9 +329,7 @@ export function BasketSidebar() {
               <p className="text-xs font-semibold text-primary mb-1">
                 ✓ Deals Applied
               </p>
-              <p className="text-xs text-primary">
-                {appliedDeals.join(", ")}
-              </p>
+              <p className="text-xs text-primary">{appliedDeals.join(", ")}</p>
             </div>
             {/* )} */}
           </div>
@@ -369,7 +371,7 @@ export function BasketSidebar() {
               }
             >
               {subtotal < restaurantData.delivery.minimum &&
-                orderType === "delivery"
+              orderType === "delivery"
                 ? `Minimum order £${restaurantData.delivery.minimum.toFixed(2)}`
                 : "Proceed to Checkout →"}
             </Button>

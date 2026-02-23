@@ -3,26 +3,23 @@
 import { X } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useBasket } from "@/hooks/useBasket";
 
 interface BasketDrawerProps {
   onClose: () => void;
 }
 
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
-
 export default function BasketDrawer({ onClose }: BasketDrawerProps) {
-  const cartItems: CartItem[] = [];
+  const { items, getTotalPrice } = useBasket();
+
+  const cartItems = items;
 
   //   const total = cartItems.reduce(
   //     (sum, item) => sum + item.price * item.quantity,
   //     0
   //   );
+
+  const total = getTotalPrice();
 
   return (
     <aside className="fixed top-0 right-0 z-40 h-full w-full sm:w-100 bg-white shadow-xl animate-slideIn flex flex-col">
@@ -45,7 +42,7 @@ export default function BasketDrawer({ onClose }: BasketDrawerProps) {
             <div key={item.id} className="flex items-center gap-3">
               <div className="relative w-12 h-12 shrink-0">
                 <Image
-                  src={item.image}
+                  src={item.image || "/placeholder.svg"}
                   alt={item.name}
                   fill
                   className="rounded object-cover"
@@ -54,7 +51,7 @@ export default function BasketDrawer({ onClose }: BasketDrawerProps) {
               <div className="flex-1 flex flex-col">
                 <span className="font-medium">{item.name}</span>
                 <span className="text-sm text-gray-500">
-                  ${item.price} × {item.quantity}
+                  £{item.price.toFixed(2)} × {item.quantity}
                 </span>
               </div>
             </div>
@@ -72,6 +69,16 @@ export default function BasketDrawer({ onClose }: BasketDrawerProps) {
           Checkout
         </Button>
       </div> */}
+
+      <div className="border-t px-4 py-4">
+        <div className="flex justify-between font-medium text-gray-800 mb-4">
+          <span>Total</span>
+          <span>£{total.toFixed(2)}</span>
+        </div>
+        <Button className="w-full bg-primary hover:bg-[#00b3a9] text-white">
+          Checkout
+        </Button>
+      </div>
     </aside>
   );
 }
