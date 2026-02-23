@@ -1,48 +1,40 @@
 "use client"
-import setGlobalColorTheme from "@/lib/theme-colors";
-import { ThemeProviderProps, useTheme } from "next-themes";
-import { createContext, useContext, useEffect, useState } from "react";
-import { ThemeColorStateParams, ThemeColors } from "@/types/theme-types";
 
-const ThemeContext = createContext<ThemeColorStateParams>({
+import setGlobalColorTheme from "@/lib/theme-colors"
+import { ThemeProviderProps, useTheme } from "next-themes"
+import { createContext, useContext, useEffect, useState } from "react"
+import { ThemeColorStateParams, ThemeColors } from "@/types/theme-types"
 
-} as ThemeColorStateParams);
+const ThemeContext = createContext<ThemeColorStateParams>(
+  {} as ThemeColorStateParams
+)
 
 export default function ThemeDataProvider({ children }: ThemeProviderProps) {
-    const getSavedThemeColor = () => {
-        try {
-            return (localStorage.getItem("themeColor") as ThemeColors) || "blue";
-        } catch {
-            return "blue" as ThemeColors
-        }
+  const { resolvedTheme } = useTheme()
+
+  const [themeColor, setThemeColor] = useState<ThemeColors>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("themeColor") as ThemeColors) || "blue"
     }
+    return "blue"
+  })
 
-    const [themeColor, setThemeColor] = useState<ThemeColors>(() => getSavedThemeColor());
-    const { resolvedTheme: theme } = useTheme();
+  useEffect(() => {
+    if (!resolvedTheme) return
 
+    const mode = resolvedTheme === "dark" ? "dark" : "light"
 
-    useEffect(() => {
-        if (!theme) return;
-        const mode = theme === "dark" ? "dark" : "light";
-        localStorage.setItem("themeColor", themeColor);
-        setGlobalColorTheme(mode, themeColor);
-        setGlobalColorTheme(theme as "light" | "dark", themeColor);
-    }, [themeColor, theme]);
+    localStorage.setItem("themeColor", themeColor)
+    setGlobalColorTheme(mode, themeColor)
+  }, [themeColor, resolvedTheme])
 
-
-
-    if (!theme) {
-        return null;
-    }
-
-    return (
-        <ThemeContext.Provider value={{ themeColor, setThemeColor }}>
-            {children}
-        </ThemeContext.Provider>
-    )
+  return (
+    <ThemeContext.Provider value={{ themeColor, setThemeColor }}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }
 
-
 export function useThemeContext() {
-    return useContext(ThemeContext)
+  return useContext(ThemeContext)
 }

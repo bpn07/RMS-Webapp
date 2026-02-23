@@ -1,10 +1,11 @@
 "use client";
 
 import { Heart, Search, ShoppingBag, User, X, Menu } from "lucide-react";
+import { Gift, Heart, Search, ShoppingBag, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBasket } from "@/hooks/useBasket";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,9 +37,10 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
   const [search, setSearch] = useState("");
 
   return (
-    <>
-      <header className="sticky top-0 z-40 border-b bg-background backdrop-blur-2xl shadow-sm">
-        <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <React.Fragment>
+      <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur-2xl shadow-sm">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+
           {/* LEFT SECTION */}
           <div className="flex items-center gap-6 lg:gap-12">
             {/* Hamburger  */}
@@ -63,6 +65,9 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                   height={20}
                   width={20}
                   className="h-7 w-7 sm:h-8 sm:w-8 object-contain"
+                  height={100}
+                  width={100}
+                  className="h-8 w-8 object-contain"
                 />
               </div>
               <span className="text-base sm:text-lg lg:text-2xl font-semibold tracking-tight text-primary">
@@ -127,9 +132,11 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                 </span>
               )}
             </Button>
+            <Link href={"/gift-voucher"}>
+              <Gift className="h-4 w-4 text-primary" />
+            </Link>
 
-            <div className="ml-1 h-6 w-px bg-border hidden md:block" />
-
+            <div className="ml-2 h-6 w-px bg-border hidden md:block" />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -233,6 +240,31 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
           <BasketDrawer onClose={() => setBasketOpen(false)} />
         </>
       )}
-    </>
+
+      {/* Mobile Search */}
+      {mobileSearchOpen && (
+        <div className="fixed inset-0 z-50 bg-background/90 backdrop-blur-md md:hidden">
+          <div className="border-b p-4">
+            <div className="relative flex items-center">
+              <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
+              <input
+                autoFocus
+                type="text"
+                placeholder={searchPlaceholder}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="h-11 w-full rounded-full border bg-muted/40 pl-9 pr-10 text-sm outline-none focus:ring-2 focus:ring-primary"
+              />
+              <button
+                onClick={() => setMobileSearchOpen(false)}
+                className="absolute right-3 text-muted-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </React.Fragment>
   );
 }
