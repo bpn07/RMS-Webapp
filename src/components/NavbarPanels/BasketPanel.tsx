@@ -70,15 +70,17 @@ export default function BasketDrawer({ onClose }: BasketDrawerProps) {
         </Button>
       </div> */}
 
-      <div className="border-t px-4 py-4">
-        <div className="flex justify-between font-medium text-gray-800 mb-4">
-          <span>Total</span>
-          <span>£{total.toFixed(2)}</span>
+      {cartItems.length === 0 ? null : (
+        <div className="border-t px-4 py-4">
+          <div className="flex justify-between font-medium text-gray-800 mb-4">
+            <span>Total</span>
+            <span>£{total.toFixed(2)}</span>
+          </div>
+          <Button className="w-full bg-primary hover:bg-[#00b3a9] text-white">
+            Checkout
+          </Button>
         </div>
-        <Button className="w-full bg-primary hover:bg-[#00b3a9] text-white">
-          Checkout
-        </Button>
-      </div>
+      )}
     </aside>
   );
 }

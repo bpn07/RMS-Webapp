@@ -1,7 +1,6 @@
 "use client";
 
-import { Heart, Search, ShoppingBag, User, X, Menu } from "lucide-react";
-import { Gift, Heart, Search, ShoppingBag, User, X } from "lucide-react";
+import { Heart, Search, ShoppingBag, User, X, Menu, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBasket } from "@/hooks/useBasket";
 import Link from "next/link";
@@ -40,7 +39,6 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
     <React.Fragment>
       <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur-2xl shadow-sm">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-
           {/* LEFT SECTION */}
           <div className="flex items-center gap-6 lg:gap-12">
             {/* Hamburger  */}
@@ -65,9 +63,6 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                   height={20}
                   width={20}
                   className="h-7 w-7 sm:h-8 sm:w-8 object-contain"
-                  height={100}
-                  width={100}
-                  className="h-8 w-8 object-contain"
                 />
               </div>
               <span className="text-base sm:text-lg lg:text-2xl font-semibold tracking-tight text-primary">
@@ -88,7 +83,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                 href="/reservation"
                 className="relative group text-foreground/60 hover:text-primary transition"
               >
-                Reserve Table
+                Reservation
                 <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
               </Link>
             </nav>
@@ -133,7 +128,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
               )}
             </Button>
             <Link href={"/gift-voucher"}>
-              <Gift className="h-4 w-4 text-primary" />
+              <Gift className="h-4 w-4 text-primary hidden md:block" />
             </Link>
 
             <div className="ml-2 h-6 w-px bg-border hidden md:block" />
@@ -212,7 +207,14 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center h-10 px-3 rounded-xl text-sm font-medium text-foreground/70 hover:text-primary hover:bg-muted/40 transition-colors"
               >
-                Reserve Table
+                Reservation
+              </Link>
+              <Link
+                href="/gift-voucher"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center h-10 px-3 rounded-xl text-sm font-medium text-foreground/70 hover:text-primary hover:bg-muted/40 transition-colors"
+              >
+                Gift Voucher
               </Link>
             </nav>
           </div>
@@ -242,7 +244,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
       )}
 
       {/* Mobile Search */}
-      {mobileSearchOpen && (
+      {/* {mobileSearchOpen && (
         <div className="fixed inset-0 z-50 bg-background/90 backdrop-blur-md md:hidden">
           <div className="border-b p-4">
             <div className="relative flex items-center">
@@ -264,7 +266,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </React.Fragment>
   );
 }
