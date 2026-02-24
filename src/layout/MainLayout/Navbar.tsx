@@ -37,7 +37,7 @@ export function Navbar({ searchPlaceholder = "Search" }: HeaderProps) {
 
   return (
     <React.Fragment>
-      <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur-2xl shadow-sm">
+      <header className="sticky top-0 z-40 border-b bg-background backdrop-blur-2xl shadow-sm">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
           {/* LEFT SECTION */}
           <div className="flex items-center gap-6 lg:gap-12">

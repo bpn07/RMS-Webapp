@@ -152,7 +152,7 @@ ${preOrderEnabled ? `Pre-order: ${selectedItems.join(", ")}` : "No pre-order"}`,
           Book your table and optionally pre-order food for a seamless visit.
         </p>
       </div>
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+      <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
         {/* LEFT SIDE – Offers */}
         <div className="space-y-6">
           <h2 className="text-3xl font-semibold tracking-tight">
