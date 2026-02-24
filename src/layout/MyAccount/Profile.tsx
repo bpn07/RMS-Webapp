@@ -29,7 +29,7 @@ export default function ProfileHeader({
               className={`shrink-0 px-4 rounded-full text-sm sm:text-base font-medium transition-all ${
                 activeTab === tab.id
                   ? "bg-white text-primary shadow"
-                  : "text-white/90 hover:text-white hover:bg-muted-foreground"
+                  : "text-white/90 hover:text-white hover:bg-blue-400"
               }
               `}
             >

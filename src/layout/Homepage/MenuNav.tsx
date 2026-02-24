@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MenuCategory } from "@/lib/restuarant-data";
 
 interface CategoryNavProps {
@@ -11,6 +11,9 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   const [activeCategory, setActiveCategory] = useState<string>(
     categories[0]?.id || "",
   );
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const buttonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +37,20 @@ export function CategoryNav({ categories }: CategoryNavProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [categories]);
 
+  // Auto-scroll active button into view
+  useEffect(() => {
+    const activeButton = buttonRefs.current[activeCategory];
+    const container = containerRef.current;
+
+    if (activeButton && container) {
+      activeButton.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [activeCategory]);
+
   const scrollToCategory = (categoryId: string) => {
     const element = document.getElementById(categoryId);
     if (element) {
@@ -51,17 +68,24 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   };
 
   return (
-    <div className="border-t border-b bg-primary-foreground sticky top-16 z-20">
+    <div className="border-t border-b bg-primary-foreground sticky top-20 md:top-20 z-20">
       <div className="mx-auto max-w-7xl">
-        <div className="flex gap-4 sm:gap-6 overflow-x-auto px-2 sm:px-4 py-3 sm:py-4 scrollbar-hide">
+        <div
+          ref={containerRef}
+          className="flex gap-4 sm:gap-6 overflow-x-auto px-2 sm:px-4 py-3 sm:py-4 scrollbar-hide"
+        >
           {categories.map((category) => (
             <button
               key={category.id}
+              ref={(el) => {
+                buttonRefs.current[category.id] = el;
+              }}
               onClick={() => scrollToCategory(category.id)}
-              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity cursor-pointer ${activeCategory === category.id
-                ? "text-white bg-primary py-1 px-3 rounded-full"
-                : "text-gray-700 hover:underline hover:text-primary"
-                }`}
+              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity cursor-pointer ${
+                activeCategory === category.id
+                  ? "text-white bg-primary py-1 px-3 rounded-full"
+                  : "text-gray-700 hover:underline hover:text-primary"
+              }`}
             >
               {category.name}
             </button>
