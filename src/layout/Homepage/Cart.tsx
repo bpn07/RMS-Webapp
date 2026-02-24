@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useBasket } from "@/hooks/useBasket";
 import { restaurantData } from "@/lib/restuarant-data";
 import { useState } from "react";
+import Link from "next/link";
 
 export function BasketSidebar() {
   const { items, updateQuantity, removeItem, getTotalPrice, getTotalItems } =
@@ -342,14 +343,12 @@ export function BasketSidebar() {
               <span>Subtotal</span>
               <span className="font-medium">£{subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-sm text-gray-600">
-              <span>Delivery Fee</span>
-              <span className="font-medium">
-                {orderType === "delivery"
-                  ? `£${deliveryFee.toFixed(2)}`
-                  : "Free"}
-              </span>
-            </div>
+            {orderType === "delivery" && (
+              <div className="flex justify-between text-sm">
+                <span>Delivery Fee</span>
+                <span>£{deliveryFee.toFixed(2)}</span>
+              </div>
+            )}
           </div>
 
           <div className="pt-3 border-t border-gray-200">
@@ -370,10 +369,12 @@ export function BasketSidebar() {
                 orderType === "delivery"
               }
             >
-              {subtotal < restaurantData.delivery.minimum &&
-              orderType === "delivery"
-                ? `Minimum order £${restaurantData.delivery.minimum.toFixed(2)}`
-                : "Proceed to Checkout →"}
+              <Link href="/checkout">
+                {subtotal < restaurantData.delivery.minimum &&
+                orderType === "delivery"
+                  ? `Minimum order £${restaurantData.delivery.minimum.toFixed(2)}`
+                  : "Proceed to Checkout →"}
+              </Link>
             </Button>
           </div>
         </div>

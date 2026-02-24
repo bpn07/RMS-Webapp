@@ -51,7 +51,7 @@ export function CategoryNav({ categories }: CategoryNavProps) {
   };
 
   return (
-    <div className="border-t border-b bg-primary-foreground sticky top-16 lg:top-20 z-20">
+    <div className="border-t border-b bg-primary-foreground sticky top-20 md:top-20 z-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex gap-4 sm:gap-6 overflow-x-auto px-2 sm:px-4 py-3 sm:py-4 scrollbar-hide">
           {categories.map((category) => (
