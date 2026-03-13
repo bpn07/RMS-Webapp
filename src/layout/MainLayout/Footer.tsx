@@ -1,6 +1,14 @@
 "use client";
 
-import { Facebook, Twitter, Instagram, ChevronDown } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  ChevronDown,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,49 +20,48 @@ export function Footer() {
     setOpen(open === key ? null : key);
   };
 
-  const discover = [
-    "Investors",
-    "About us",
-    "Takeaway",
-    "More",
-    "Newsroom",
-    "Engineering blog",
-    "Design blog",
-    "Gift Cards",
-    "Students",
-    "Careers",
-    "Restaurant signup",
-    "Become a rider",
-    "Talent Directory",
+  const company = ["About Us", "Careers", "Press", "Blog", "Gift Cards"];
+
+  const partners = [
+    "Add your restaurant",
+    "Become a delivery partner",
+    "Restaurant dashboard",
+    "Partner support",
   ];
 
-  const legal = [
-    "Terms and conditions",
-    "Privacy",
-    "Cookies",
-    "Modern Slavery Statement",
-    "Tax Strategy",
-    "Section 172 Statement",
-    "Public Authority Requests",
+  const cuisines = [
+    "Pizza",
+    "Burgers",
+    "Sushi",
+    "Chinese",
+    "Indian",
+    "Nepali",
+    "Italian",
   ];
 
-  const help = ["Contact", "FAQs", "Cuisines", "Brands"];
+  const support = ["Help Center", "Contact", "FAQs", "Report issue"];
+
+  const sections = [
+    { key: "company", title: "Company", items: company },
+    { key: "partners", title: "Partners", items: partners },
+    { key: "cuisines", title: "Popular Cuisines", items: cuisines },
+    { key: "support", title: "Support", items: support },
+  ];
 
   return (
-    <footer className="bg-gray-800 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <footer className="bg-background text-muted-foreground border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+
+        {/* MOBILE ACCORDION */}
         <div className="lg:hidden space-y-4">
-          {[
-            { key: "discover", title: "Discover", items: discover },
-            { key: "legal", title: "Legal", items: legal },
-            { key: "help", title: "Help", items: help },
-          ].map((section) => (
-            <div key={section.key} className="border-b border-gray-700">
+          {sections.map((section) => (
+            <div key={section.key} className="border-b border-border">
               <button
                 onClick={() => toggle(section.key)}
-                className="w-full flex items-center justify-between py-4 text-white font-semibold"
+                className="w-full flex items-center justify-between py-4 text-foreground font-semibold"
               >
                 {section.title}
+
                 <ChevronDown
                   className={`w-5 h-5 transition-transform ${
                     open === section.key ? "rotate-180" : ""
@@ -63,119 +70,116 @@ export function Footer() {
               </button>
 
               {open === section.key && (
-                <ul className="pb-4 pl-2 space-y-2 text-sm">
+                <ul className="pb-4 space-y-2 text-sm">
                   {section.items.map((item) => (
                     <li key={item}>
-                      <a
+                      <Link
                         href="#"
-                        className="block py-1 hover:text-white transition-colors"
+                        className="block hover:text-foreground transition-colors"
                       >
                         {item}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
           ))}
-
-          {/* App Buttons */}
-          <div className="pt-4 space-y-3">
-            <a
-              href="#"
-              className="flex items-center justify-center gap-3 bg-black text-white py-3 rounded-xl"
-            >
-              <span className="text-sm font-medium">
-                Download on the App Store
-              </span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center justify-center gap-3 bg-black text-white py-3 rounded-xl"
-            >
-              <span className="text-sm font-medium">Get it on Google Play</span>
-            </a>
-          </div>
         </div>
 
-        {/* Desktop */}
-        <div className="hidden lg:grid grid-cols-4 gap-8 py-10">
-          {/* Discover */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">Discover</h3>
-            <ul className="space-y-3 text-sm">
-              {discover.map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* DESKTOP GRID */}
+        <div className="hidden lg:grid grid-cols-5 gap-10">
 
-          {/* Legal */}
+          {/* BRAND */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Legal</h3>
-            <ul className="space-y-3 text-sm">
-              {legal.map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <h2 className="text-foreground text-2xl font-bold mb-4">
+              Kathmandu
+            </h2>
 
-          {/* Help */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">Help</h3>
-            <ul className="space-y-3 text-sm">
-              {help.map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <p className="text-sm leading-relaxed">
+              Discover the best food & drinks in your city. Order your
+              favourite meals from top restaurants delivered fast to
+              your doorstep.
+            </p>
 
-          {/* Mobile Apps */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">Take with you</h3>
-            <div className="space-y-3">
-              <a
-                href="#"
-                className="flex items-center gap-3 bg-black hover:bg-gray-900 text-white px-4 py-3 rounded-lg transition-colors"
-              >
-                <span className="text-sm font-semibold">App Store</span>
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-3 bg-black hover:bg-gray-900 text-white px-4 py-3 rounded-lg transition-colors"
-              >
-                <span className="text-sm font-semibold">Google Play</span>
-              </a>
+            <div className="mt-6 space-y-3 text-sm">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-primary" />
+                Kathmandu, Nepal
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-primary" />
+                +977 9800000000
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-primary" />
+                support@kathmandu.com
+              </div>
             </div>
           </div>
+
+          {/* FOOTER SECTIONS */}
+          {sections.map((section) => (
+            <div key={section.key}>
+              <h3 className="text-foreground font-semibold mb-4">
+                {section.title}
+              </h3>
+
+              <ul className="space-y-3 text-sm">
+                {section.items.map((item) => (
+                  <li key={item}>
+                    <Link
+                      href="#"
+                      className="hover:text-foreground transition-colors"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* ================= BOTTOM BAR ================= */}
-        <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-white">
-              <Facebook className="w-5 h-5" />
+        {/* BOTTOM BAR */}
+        <div className="border-t border-border mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+          {/* SOCIAL */}
+          <div className="flex gap-5">
+            <Link href="#">
+              <Facebook className="w-5 h-5 hover:text-primary transition-colors" />
             </Link>
-            <Link href="#" className="hover:text-white">
-              <Twitter className="w-5 h-5" />
+
+            <Link href="#">
+              <Twitter className="w-5 h-5 hover:text-primary transition-colors" />
             </Link>
-            <Link href="#" className="hover:text-white">
-              <Instagram className="w-5 h-5" />
+
+            <Link href="#">
+              <Instagram className="w-5 h-5 hover:text-primary transition-colors" />
             </Link>
           </div>
-          <p className="text-gray-500 text-sm">© {currentYear}</p>
+
+          {/* COPYRIGHT */}
+          <p className="text-sm">
+            © {currentYear} Kathmandu. All rights reserved.
+          </p>
+
+          {/* LEGAL */}
+          <div className="flex gap-6 text-sm">
+            <Link href="#" className="hover:text-foreground">
+              Privacy
+            </Link>
+
+            <Link href="#" className="hover:text-foreground">
+              Terms
+            </Link>
+
+            <Link href="#" className="hover:text-foreground">
+              Cookies
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
