@@ -1,7 +1,6 @@
 "use client";
 
 import { RestaurantHero } from "@/layout/Homepage/HeroSection";
-import { RestaurantInfo } from "@/layout/Homepage/Info";
 import { CategoryNav } from "@/layout/Homepage/MenuNav";
 import { BasketSidebar } from "@/layout/Homepage/Cart";
 import { MobileBasket } from "@/layout/Homepage/MobileBasket";
@@ -18,8 +17,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { MenuItemCard } from "@/layout/Homepage/MenuItems";
 import { WelcomeModal } from "@/components/FirstTimePopup";
+import RestaurantInfo from "@/layout/Homepage/Info";
+
 
 export default function RestaurantPage() {
+
   const popularSection = restaurantData.categories.find(
     (cat) => cat.id === "popular-with-others",
   );

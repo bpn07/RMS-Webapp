@@ -41,8 +41,17 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
   return (
     <>
       <div
-        className={`group relative flex flex-col sm:flex-row items-center gap-3 rounded-2xl border p-3 transition-all duration-200 cursor-pointer w-full
-    ${isInBasket ? "border-primary bg-primary/10 shadow-md" : "bg-white border-gray-100 hover:shadow-md hover:border-gray-200"}`}
+        className={`
+    group relative flex items-center gap-3 
+    rounded-2xl border p-3 transition-all duration-200 cursor-pointer w-full
+    
+    sm:flex-row flex-row
+    
+    ${isInBasket
+            ? "border-primary bg-primary/10 shadow-md"
+            : "bg-white border-gray-100 hover:shadow-md hover:border-gray-200"
+          }
+  `}
         onClick={() => setOpen(true)}
       >
         {basketQuantity > 0 && (

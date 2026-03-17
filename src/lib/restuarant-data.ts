@@ -55,7 +55,7 @@ export const restaurantData: RestaurantData = {
   },
 
   delivery: {
-    time: "around 50 min",
+    time: "50 min",
     distance: "4.90 mi",
     fee: 7.99,
     minimum: 15.0,
