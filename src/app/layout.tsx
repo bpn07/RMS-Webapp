@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "RMS",
   description: "Restuarant Management System",
 };
