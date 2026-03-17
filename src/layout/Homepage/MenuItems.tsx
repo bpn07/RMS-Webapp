@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import type { MenuItem } from "@/lib/restuarant-data";
 import { useBasket } from "@/hooks/useBasket";
-// import { BiSolidDish } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
+import { BiSolidDish } from "react-icons/bi";
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -21,8 +21,13 @@ interface MenuItemCardProps {
 
 export function MenuItemCard({ item }: MenuItemCardProps) {
   const addItem = useBasket((state) => state.addItem);
+  const basketItems = useBasket((state) => state.items);
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+
+
+  const isInBasket = basketItems.some((i) => i.id === item.id);
+  const basketQuantity = basketItems.find((i) => i.id === item.id)?.quantity || 0;
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -32,22 +37,23 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
     setQuantity(1);
   };
 
-  // const ImagePlaceholder = () => (
-  //   <div className="absolute inset-0 flex items-center justify-center bg-blue-50">
-  //     <BiSolidDish className="text-blue-200 text-5xl" />
-  //   </div>
-  // );
 
   return (
     <>
       <div
-        className="group relative flex flex-row items-center gap-3 rounded-2xl bg-white border border-gray-100 p-3 hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer w-full"
+        className={`group relative flex flex-col sm:flex-row items-center gap-3 rounded-2xl border p-3 transition-all duration-200 cursor-pointer w-full
+    ${isInBasket ? "border-primary bg-primary/10 shadow-md" : "bg-white border-gray-100 hover:shadow-md hover:border-gray-200"}`}
         onClick={() => setOpen(true)}
       >
+        {basketQuantity > 0 && (
+          <div className="absolute -top-2 -right-2 bg-background text-black border text-xs font-bold w-8 h-8 rounded-full flex items-center justify-center z-20 cursor-default">
+            {basketQuantity}
+          </div>
+        )}
         {/* Image */}
-        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-blue-50">
-          {/* <ImagePlaceholder /> */}
-          <Image
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0">
+          <ImagePlaceholder />
+          {/* <Image
             src={item.image || "/placeholder.svg"}
             alt={item.name}
             fill
@@ -55,7 +61,7 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = "none";
             }}
-          />
+          /> */}
         </div>
 
         {/* Text */}
@@ -77,7 +83,7 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
             </div>
             <div className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
-              <span>20–30m</span>
+              <span>20-30m</span>
             </div>
           </div>
         </div>
@@ -87,16 +93,16 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
           <p className="font-bold text-sm text-gray-900">
             £{item.price.toFixed(2)}
           </p>
-          <button
+          <Button
             onClick={(e) => {
               e.stopPropagation();
               setOpen(true);
             }}
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 hover:bg-blue-600 active:scale-90 text-white shadow-sm shadow-blue-200 transition-all duration-150"
+            className="w-8 h-8 rounded-full  active:scale-90 "
             aria-label={`Add ${item.name} to cart`}
           >
             <Plus className="h-4 w-4" />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -186,3 +192,10 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
     </>
   );
 }
+
+
+const ImagePlaceholder = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
+    <BiSolidDish className="text-primary text-5xl" />
+  </div>
+);

@@ -16,8 +16,8 @@ import {
 import { PROMOTION_POPUPS } from "@/layout/Homepage/PromoPopups";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import { FirstTimePopup } from "@/components/FirstTimePopup";
 import { MenuItemCard } from "@/layout/Homepage/MenuItems";
+import { WelcomeModal } from "@/components/FirstTimePopup";
 
 export default function RestaurantPage() {
   const popularSection = restaurantData.categories.find(
@@ -58,7 +58,7 @@ export default function RestaurantPage() {
 
   return (
     <>
-      <FirstTimePopup />
+      <WelcomeModal />
 
       <div className="min-h-screen bg-primary-foreground pb-20 lg:pb-0">
         <main className="mx-auto max-w-7xl px-2 sm:px-4 py-4 sm:py-6">
@@ -197,9 +197,11 @@ export default function RestaurantPage() {
                   <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {category.name}
                   </h2>
-                  <div className="w-full space-y-2 sm:space-y-3 flex flex-wrap items-start">
+                  <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     {category.items.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
+                      <div key={item.id} className="w-full">
+                        <MenuItemCard item={item} />
+                      </div>
                     ))}
                   </div>
                 </section>

@@ -16,6 +16,7 @@ import { useBasket } from "@/hooks/useBasket";
 import { restaurantData } from "@/lib/restuarant-data";
 import { useState } from "react";
 import Link from "next/link";
+import { RecommendedItems } from "./RecommendedItems";
 
 export function BasketSidebar() {
   const { items, updateQuantity, removeItem, getTotalPrice, getTotalItems } =
@@ -207,6 +208,9 @@ export function BasketSidebar() {
                     £{(item.price * item.quantity).toFixed(2)}
                   </span>
                 </div>
+
+
+                <RecommendedItems excludeIds={items.map((i) => i.id)} />
               </div>
             ))}
           </div>
@@ -226,21 +230,19 @@ export function BasketSidebar() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setOrderType("delivery")}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                    orderType === "delivery"
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${orderType === "delivery"
                       ? "bg-linear-to-br from-primary to-primary/50 text-white shadow-md shadow-primary/30"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
+                    }`}
                 >
                   Delivery
                 </button>
                 <button
                   onClick={() => setOrderType("collection")}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                    orderType === "collection"
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${orderType === "collection"
                       ? "bg-linear-to-br from-primary  to-primary/50 text-white shadow-md shadow-primary/30"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
+                    }`}
                 >
                   Collection
                 </button>
@@ -371,7 +373,7 @@ export function BasketSidebar() {
             >
               <Link href="/checkout">
                 {subtotal < restaurantData.delivery.minimum &&
-                orderType === "delivery"
+                  orderType === "delivery"
                   ? `Minimum order £${restaurantData.delivery.minimum.toFixed(2)}`
                   : "Proceed to Checkout →"}
               </Link>
