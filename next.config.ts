@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   // reactCompiler: true,
   reactStrictMode: true,
 
+  turbopack: {},
+
   images: {
     remotePatterns: [
       {

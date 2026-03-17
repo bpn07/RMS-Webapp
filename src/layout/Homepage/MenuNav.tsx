@@ -81,7 +81,7 @@ export function CategoryNav({ categories }: CategoryNavProps) {
                 buttonRefs.current[category.id] = el;
               }}
               onClick={() => scrollToCategory(category.id)}
-              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:opacity-80 transition-opacity cursor-pointer ${
+              className={`whitespace-nowrap font-medium text-sm sm:text-base hover:text-[#00ccbc] transition-opacity cursor-pointer ${
                 activeCategory === category.id
                   ? "text-white bg-primary py-1 px-3 rounded-full"
                   : "text-gray-700 hover:underline hover:text-primary"
