@@ -3,17 +3,18 @@
 import { useEffect, useState } from "react";
 
 export function useFirstTimePopup(key: string) {
-  const [open, setOpen] = useState(() => {
-    if (typeof window === "undefined") return false;
+  const [open, setOpen] = useState(false);
 
-    return !localStorage.getItem(key);
-  });
+useEffect(() => {
+  const isFirst = !sessionStorage.getItem(key);
 
-  useEffect(() => {
-    if (open) {
-      localStorage.setItem(key, "true");
-    }
-  }, [open, key]);
+  if (isFirst) {
+    setTimeout(() => {
+      setOpen(true);
+      sessionStorage.setItem(key, "true");
+    }, 800);
+  }
+}, [key]);
 
   return { open, setOpen };
 }

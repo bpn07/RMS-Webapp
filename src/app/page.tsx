@@ -16,8 +16,8 @@ import {
 import { PROMOTION_POPUPS } from "@/layout/Homepage/PromoPopups";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import { FirstTimePopup } from "@/components/FirstTimePopup";
 import { MenuItemCard } from "@/layout/Homepage/MenuItems";
+import { WelcomeModal } from "@/components/FirstTimePopup";
 
 export default function RestaurantPage() {
   const popularSection = restaurantData.categories.find(
@@ -58,7 +58,7 @@ export default function RestaurantPage() {
 
   return (
     <>
-      <FirstTimePopup />
+      <WelcomeModal />
 
       <div className="min-h-screen bg-primary-foreground pb-20 lg:pb-0">
         <main className="mx-auto max-w-7xl px-2 sm:px-4 py-4 sm:py-6">
