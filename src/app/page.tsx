@@ -18,10 +18,9 @@ import { useRef, useState, useEffect } from "react";
 import { MenuItemCard } from "@/layout/Homepage/MenuItems";
 import { WelcomeModal } from "@/components/FirstTimePopup";
 import RestaurantInfo from "@/layout/Homepage/Info";
-
+import Image from "next/image";
 
 export default function RestaurantPage() {
-
   const popularSection = restaurantData.categories.find(
     (cat) => cat.id === "popular-with-others",
   );
@@ -91,7 +90,7 @@ export default function RestaurantPage() {
                   <button
                     aria-label="Scroll left"
                     onClick={() => scroll("left")}
-                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-11 h-8 w-8 items-center justify-center rounded-full bg-background shadow border hover:bg-muted"
+                    className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-11 h-9 w-9 items-center justify-center rounded-full bg-background shadow-md border hover:bg-muted transition-colors cursor-pointer"
                   >
                     <ChevronLeft size={18} />
                   </button>
@@ -101,7 +100,7 @@ export default function RestaurantPage() {
                 <div
                   ref={sliderRef}
                   onScroll={updateScrollButtons}
-                  className="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2 sm:mx-0 sm:px-0"
+                  className="flex gap-4 overflow-x-auto sm:overflow-x-hidden no-scrollbar pb-2 -mx-2 px-2 sm:mx-0 sm:px-0"
                 >
                   {restaurantData.promotions.map((promo) => {
                     const popupContent =
@@ -111,32 +110,54 @@ export default function RestaurantPage() {
 
                     const Card = (
                       <div
-                        className={`group relative min-w-65 sm:min-w-75 rounded-2xl 
-                                    bg-linear-to-br from-primary-foreground to-primary/10
-                                    border border-secondary
-                                    p-4 sm:p-5 flex gap-4
-                                    shadow-sm hover:shadow-lg
-                                    transition-all duration-300 ease-out hover:bg-primary/20
-                                    ${popupContent ? "cursor-pointer hover:-translate-y-1" : "cursor-default"}`}
+                        className={`group relative shrink-0 w-[70%] sm:w-24 md:min-w-70 sm:min-w-95 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-md transition-all duration-300 ease-out ${popupContent ? "cursor-pointer" : "cursor-default"}`}
                       >
-                        {/* Icon */}
-                        <div
-                          className="relative z-10 flex h-12 w-12 items-center justify-center 
-                                     rounded-xl bg-primary-foreground text-neutral-700 text-xl shrink-0
-                                     transition-transform duration-300 group-hover:scale-105"
-                        >
-                          {promo.icon}
-                        </div>
+                        {/* ── Background ── */}
+                        {promo.image ? (
+                          <>
+                            <div className="absolute inset-0">
+                              <Image
+                                src={promo.image}
+                                alt={promo.title}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
+                            </div>
+                            <div className="absolute inset-0 bg-linear-to-r from-black/75 via-black/40 to-black/10" />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
+                          </>
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 bg-linear-to-br from-primary via-primary/80 to-primary/50" />
+                            <div className="absolute -right-6 -top-6 w-40 h-40 rounded-full bg-white/10 transition-transform duration-500 group-hover:scale-125" />
+                            <div className="absolute -left-4 -bottom-8 w-28 h-28 rounded-full bg-white/5 transition-transform duration-500 group-hover:scale-110" />
+                          </>
+                        )}
 
-                        {/* Content */}
-                        <div className="relative z-10">
-                          <h3 className="font-medium text-sm sm:text-base text-primary tracking-tight">
-                            {promo.title}
-                          </h3>
+                        <div className="relative z-10 flex flex-col justify-between h-full p-5 sm:p-6">
+                          <div className="flex items-center gap-2.5">
+                            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-white ring-1 ring-white/30 shadow-lg">
+                              {typeof promo.icon === "string" ? (
+                                promo.icon
+                              ) : promo.icon ? (
+                                <promo.icon className="w-6 h-6" />
+                              ) : null}
+                            </span>
+                            {popupContent && (
+                              <span className="text-[10px] font-semibold text-white uppercase tracking-[0.15em]">
+                                Tap to learn more
+                              </span>
+                            )}
+                          </div>
 
-                          <p className="text-xs sm:text-sm text-neutral-500 mt-1 leading-relaxed whitespace-pre-line">
-                            {promo.description}
-                          </p>
+                          <div>
+                            <h3 className="font-bold text-base sm:text-lg text-white leading-tight tracking-tight drop-shadow-sm">
+                              {promo.title}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-white/80 mt-1 leading-relaxed line-clamp-2 drop-shadow-sm">
+                              {promo.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     );
@@ -149,12 +170,86 @@ export default function RestaurantPage() {
                       <Dialog key={promo.id}>
                         <DialogTrigger asChild>{Card}</DialogTrigger>
 
-                        <DialogContent className="max-w-md">
-                          <DialogHeader>
-                            <DialogTitle>{promo.title}</DialogTitle>
-                          </DialogHeader>
+                        <DialogContent className="w-[calc(100%-2rem)] max-w-lg p-0 overflow-hidden rounded-2xl border-0 shadow-2xl [&>button]:bg-blue-500 [&>button]:text-white [&>button]:rounded-full [&>button]:p-2">
+                          <div className="relative w-full h-56 sm:h-64">
+                            {promo.image ? (
+                              <>
+                                <Image
+                                  src={promo.image}
+                                  alt={promo.title}
+                                  fill
+                                  sizes="600px"
+                                  className="object-cover"
+                                />
 
-                          {popupContent}
+                                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
+
+                                <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent" />
+                              </>
+                            ) : (
+                              <>
+                                <div className="absolute inset-0 bg-linear-to-br from-primary via-primary/80 to-primary/50" />
+                                <div className="absolute -right-6 -bottom-6 w-70 h-70 rounded-full bg-white/10" />
+                                <div className="absolute -left-4 -bottom-8 w-50 h-50 rounded-full bg-white/5" />
+                              </>
+                            )}
+
+                            {/* Floating banner */}
+                            <div className="absolute bottom-0 left-0 w-full p-5 sm:p-6 flex items-end gap-3">
+                              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-white ring-1 ring-white/30 shadow-lg">
+                                {typeof promo.icon === "string" ? (
+                                  promo.icon
+                                ) : promo.icon ? (
+                                  <promo.icon className="w-6 h-6" />
+                                ) : null}
+                              </span>
+
+                              <div>
+                                <DialogTitle className="text-white text-xl sm:text-2xl font-bold leading-tight drop-shadow-md m-0">
+                                  {promo.title}
+                                </DialogTitle>
+
+                                <p className="text-white/80 text-xs sm:text-sm mt-0.5">
+                                  Limited time offer
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Body */}
+                          <div className="relative p-5 sm:p-6 bg-linear-to-b from-background to-muted/40">
+                            {!promo.image && (
+                              <DialogHeader className="mb-4">
+                                <DialogTitle className="flex items-center gap-2.5 text-lg">
+                                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-white ring-1 ring-white/30 shadow-lg">
+                                    {typeof promo.icon === "string" ? (
+                                      promo.icon
+                                    ) : promo.icon ? (
+                                      <promo.icon className="text-blue-500 w-6 h-6" />
+                                    ) : null}
+                                  </span>
+                                  {promo.title}
+                                </DialogTitle>
+                              </DialogHeader>
+                            )}
+
+                            {/* Content */}
+                            <div className="text-md text-foreground leading-relaxed">
+                              {popupContent}
+                            </div>
+
+                            <div className="mt-6 flex items-center justify-between gap-3">
+                              <p className="text-xs text-muted-foreground">
+                                *Terms & conditions apply
+                              </p>
+
+                              {promo.claimable && (
+                                <button className="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-white shadow-md hover:bg-primary/90 transition">
+                                  Claim Offer
+                                </button>
+                              )}
+                            </div>
+                          </div>
                         </DialogContent>
                       </Dialog>
                     );
@@ -166,7 +261,7 @@ export default function RestaurantPage() {
                   <button
                     aria-label="Scroll right"
                     onClick={() => scroll("right")}
-                    className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 items-center justify-center rounded-full bg-white shadow border hover:bg-muted"
+                    className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-11 h-9 w-9 items-center justify-center rounded-full bg-background shadow-md border hover:bg-muted transition-colors cursor-pointer"
                   >
                     <ChevronRight size={18} />
                   </button>
