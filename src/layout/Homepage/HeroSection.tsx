@@ -13,7 +13,8 @@ export function RestaurantHero({ altText }: RestaurantHeroProps) {
         alt={altText}
         fill
         className="object-cover"
-        priority
+        loading="eager"
+        fetchPriority="high"
       />
     </div>
   );
