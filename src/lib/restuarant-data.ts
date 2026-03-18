@@ -37,6 +37,7 @@ export interface RestaurantData {
     count: string;
   };
   delivery: {
+    address: string;
     time: string;
     distance: string;
     fee: number;
@@ -60,6 +61,7 @@ export const restaurantData: RestaurantData = {
   },
 
   delivery: {
+    address: "123 Main St, City",
     time: "50 min",
     distance: "4.90 mi",
     fee: 7.99,
