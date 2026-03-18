@@ -31,6 +31,7 @@ export function BasketSidebar() {
   const [showPromoInput, setShowPromoInput] = useState(false);
   const [appliedDeals, setAppliedDeals] = useState<string[]>(["SPRING10"]);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState(false);
+  const [riderTip, setRiderTip] = useState<number>(0);
 
   const allergens: string[] = [];
   if (items.length === 0) {
@@ -331,16 +332,36 @@ export function BasketSidebar() {
               <span>Delivery Fee</span>
               <span>£{deliveryFee.toFixed(2)}</span>
             </div>
+
+            <div className="flex justify-between items-center text-sm mt-2">
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Rider Tip</span>
+                <button
+                  type="button"
+                  onClick={() => setRiderTip((prev) => Math.max(prev - 1, 0))}
+                  className="cursor-pointer h-6 w-6 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 transition-all"
+                >
+                  <Minus className="h-3 w-3" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setRiderTip((prev) => prev + 1)}
+                  className="cursor-pointer h-6 w-6 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 transition-all"
+                >
+                  <Plus className="h-3 w-3" />
+                </button>
+              </div>
+
+              <span className="text-center font-medium">£{riderTip}.00</span>
+
+            </div>
           </div>
 
           <div className="border-t border-gray-200">
             <div className="flex justify-between items-baseline py-2">
               <span className="text-base font-bold text-gray-900">Total</span>
               <span className="text-2xl font-bold text-gray-900">
-                £
-                {(
-                  subtotal + (deliveryFee)
-                ).toFixed(2)}
+                £{(subtotal + deliveryFee + riderTip).toFixed(2)}
               </span>
             </div>
 
