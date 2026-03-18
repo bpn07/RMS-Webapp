@@ -1,3 +1,6 @@
+import { LucideIcon } from "lucide-react";
+import { Globe } from "lucide-react";
+
 export interface MenuItem {
   id: string;
   name: string;
@@ -19,8 +22,10 @@ export interface Promotion {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon?: LucideIcon | string;
   popupKey?: string;
+  image?: string;
+  claimable?: boolean;
 }
 
 export interface RestaurantData {
@@ -69,8 +74,9 @@ export const restaurantData: RestaurantData = {
       title: "20% off entire menu",
       description:
         "For orders over £20, excluding alcohol. T&Cs apply\nNew customers only",
-      icon: "🎟️",
+      icon: Globe,
       popupKey: "menu-discount",
+      claimable: true,
     },
     {
       id: "promo-delivery-info",
@@ -79,13 +85,17 @@ export const restaurantData: RestaurantData = {
         "This means you won't be able to follow your order or get live updates",
       icon: "🚫",
       popupKey: "delivery-info",
+      image: "/images/deals/dine-deal.jpg",
+      claimable: false,
     },
     {
       id: "promo-bank-offer",
       title: "10% Bank Offer",
       description: "Pay using XYZ Bank cards",
-      icon: "🏦",
+      icon: Globe,
       popupKey: "bank-offer",
+      image: "/images/deals/dine-deal.jpg",
+      claimable: true,
     },
     {
       id: "promo-bank-offeer",
@@ -93,6 +103,8 @@ export const restaurantData: RestaurantData = {
       description: "Pay using XYZ Bank cards",
       icon: "🏦",
       popupKey: "bank-offer",
+      image: "/images/deals/dine-deal.jpg",
+      claimable: false,
     },
   ],
 
