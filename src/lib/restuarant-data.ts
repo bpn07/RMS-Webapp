@@ -6,7 +6,7 @@ export interface MenuItem {
   name: string;
   description?: string;
   price: number;
-  image: string;
+  image?: string;
   popular?: boolean;
   badge?: string;
 }
@@ -145,6 +145,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "cyob-large-pop",
           name: "Create Your Own - Large",
+          description: "3 easy steps to a perfect box",
           price: 9.75,
           image: "/food.jpg",
           popular: true,
@@ -152,6 +153,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "cyob-regular-pop",
           name: "Create Your Own - Regular",
+          description: "3 easy steps to a perfect box",
           price: 7.75,
           image: "/food.jpg",
           popular: true,
@@ -159,13 +161,15 @@ export const restaurantData: RestaurantData = {
         {
           id: "cyob-value-pop",
           name: "Create Your Own - Value",
+          description: "3 easy steps to a perfect box",
           price: 6.75,
           image: "/food.jpg",
           popular: true,
         },
         {
           id: "salt-pepper",
-          name: "4 x Salt & Pepper...",
+          name: "4 x Salt & Pepper",
+          description: "3 easy steps to a perfect box",
           price: 5.99,
           image: "/food.jpg",
           popular: true,
@@ -173,6 +177,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "ice-blast",
           name: "Large Ice Blast",
+          description: "3 easy steps to a perfect box",
           price: 5.99,
           image: "/food.jpg",
           popular: true,
@@ -180,6 +185,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "caramel-chicken",
           name: "Caramel Chicken",
+          description: "3 easy steps to a perfect box",
           price: 9.25,
           image: "/food.jpg",
           popular: true,
@@ -187,6 +193,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "manchurian-chicken",
           name: "Manchurian Chicken",
+          description: "3 easy steps to a perfect box",
           price: 9.25,
           image: "/food.jpg",
           popular: true,
@@ -194,6 +201,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "jumbo-roll",
           name: "2 x Jumbo Chicken Roll",
+          description: "3 easy steps to a perfect box",
           price: 7.49,
           image: "/food.jpg",
           popular: true,
@@ -201,6 +209,7 @@ export const restaurantData: RestaurantData = {
         {
           id: "crispy-chicken",
           name: "Oodles Crispy Chicken",
+          description: "3 easy steps to a perfect box",
           price: 9.25,
           image: "/food.jpg",
           popular: true,

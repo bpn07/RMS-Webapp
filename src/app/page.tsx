@@ -270,13 +270,17 @@ export default function RestaurantPage() {
 
               {/* Popular items - horizontal scroll on mobile */}
               {popularSection && (
-                <section>
-                  <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+                <section className="bg-primary/5 rounded-2xl p-4 sm:p-6 border border-primary/10">
+                  <h2 className="text-xl sm:text-2xl font-bold mb-4">
                     {popularSection.name}
                   </h2>
-                  <div className="flex item-center gap-3 sm:gap-4 overflow-x-auto no-scrollbar py-2">
+
+                  <div className="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar py-2 snap-x snap-mandatory">
                     {popularSection.items.map((item) => (
-                      <div key={item.id}>
+                      <div
+                        key={item.id}
+                        className="min-w-[85%] sm:min-w-95 max-w-100 shrink-0 snap-start"
+                      >
                         <MenuItemCard item={item} />
                       </div>
                     ))}
@@ -289,15 +293,22 @@ export default function RestaurantPage() {
                 <section
                   key={category.id}
                   id={category.id}
-                  className="scroll-mt-32"
+                  className="bg-white rounded-2xl border p-4 sm:p-6 shadow-sm scroll-mt-32"
                 >
-                  <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
-                    {category.name}
-                  </h2>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl sm:text-2xl font-bold">
+                      {category.name}
+                    </h2>
+
+                    <span className="text-sm text-muted-foreground">
+                      {category.items.length} items
+                    </span>
+                  </div>
+
                   <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     {category.items.map((item) => (
                       <div key={item.id} className="w-full">
-                        <MenuItemCard item={item} />
+                        <MenuItemCard key={item.id} item={item} />
                       </div>
                     ))}
                   </div>
